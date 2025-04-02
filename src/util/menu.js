@@ -1,4 +1,4 @@
-import {KhamPha, ThuVien, ZingChart, Radio, BangXepHang, ChuDe, Top100} from '../util/iconSgv/index';
+import {KhamPha, ThuVien, ZingChart, Radio, BangXepHang, ChuDe, Top100, History, Favorite, Playlist, Album} from '../util/iconSgv/index';
 
 export const menuSide = [
     {
@@ -40,3 +40,26 @@ export const menuSide2 = [
         icons: Top100
     },
 ]
+
+export const menuSide3 = [
+    {
+        path: '/mymusic/history',
+        text: 'Nghe gần đây',
+        icons: History
+    },
+    {
+        path: '/mymusic/song',
+        text: 'Bài hát yêu thích',
+        icons: Favorite,
+    },
+    {
+        path: '/mymusic/playlist',
+        text: 'Playlist',
+        icons: Playlist
+    },
+    {
+        path: '/mymusic/album',
+        text: 'Album',
+        icons: Album
+    }
+];

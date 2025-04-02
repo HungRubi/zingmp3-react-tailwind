@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import {Advertisement, Header, ListMusic, ListMusicSize9, ListMusicSlider, ListRadio, Slider} from '../../components'
+import {Advertisement, ListMusic, ListMusicSize9, ListMusicSlider, ListRadio, Slider} from '../../components'
 
 const Home = () => {
     const {
@@ -18,9 +18,6 @@ const Home = () => {
     
     return (
         <>
-            <div className="h-[70px] px-[59px]">
-                <Header/>
-            </div>
             <div className="w-full px-[59px] backgroundColor-main-100">
                 <Slider/>
                 <Advertisement/>

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 const {MdOutlineArrowForwardIos} = icons;
 
-const ListRadio = ({data}) => {
+const ListRadio = ({data, isName}) => {
     return (
         <div className="w-full mt-10">
-            <div className="w-full flex items-center justify-between">
-                <h2 className="capitalize text-2xl font-medium">
+            <div className={`w-full flex items-center justify-between ${isName}`}>
+                <h2 className={`capitalize text-2xl font-medium`}>
                     radio nổi bật
                 </h2>
                 <div className={`flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500]`}>
@@ -54,6 +54,7 @@ const ListRadio = ({data}) => {
 
 ListRadio.propTypes = {
     data: PropTypes.node.isRequired,
+    isName: PropTypes.node.isRequired,
 }
 
 export default ListRadio

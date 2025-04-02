@@ -1,6 +1,7 @@
 import {ButtonCricle, ButtonPlay} from '../components'
 import PropTypes from 'prop-types';
 import icons from "../util/icons"
+import { NavLink } from 'react-router-dom';
 const { FaRegHeart,BsThreeDots,MdOutlineArrowForwardIos } = icons
 
 const ListMusic = ({classCard, nameList, classIcon, isAbum, isFan, dataSinger, data}) => {
@@ -47,7 +48,9 @@ const ListMusic = ({classCard, nameList, classIcon, isAbum, isFan, dataSinger, d
                                 <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
                                     <FaRegHeart className="text-lg text-white"/>
                                 </ButtonCricle>
-                                <ButtonPlay className="text-white !h-11 !w-11"/>
+                                <NavLink to={`/album/${item.slug}`}>
+                                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                                </NavLink>
                                 <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
                                     <BsThreeDots className="text-lg text-white"/>
                                 </ButtonCricle>

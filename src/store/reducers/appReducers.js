@@ -13,6 +13,9 @@ const initState = {
     radio: [],
     albumChill: [],
     topSong: [],
+    currentUser: null,
+    favoriteSong: [],
+    favoriteAlbum: [],
 }
 
 const appReducer = (state = initState, action) => {
@@ -32,6 +35,22 @@ const appReducer = (state = initState, action) => {
                 radio: action.payload?.radio,
                 albumChill: action.payload?.albumChill,
                 topSong: action.payload?.topSong,
+            }
+
+        case actionType.LOGIN:
+            return {
+                ...state,
+                currentUser: action.payload?.user || null,
+                message: action.payload?.message || null,
+                favoriteSong: action.payload?.favoriteSongs || [],
+                favoriteAlbum: action.payload?.favoriteAlbums || [],
+                loginError: null
+            }
+        case actionType.LOGIN_FAIL:
+            return {
+                ...state,
+                message: null,
+                loginError: action.payload || null,
             }
         default:
             return state

@@ -1,11 +1,11 @@
 import { ToastContainer } from 'react-toastify';
-// import { useSelector, useDispatch } from 'react-redux';
-import {Home, Public, Login} from './containers/public/';
+import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100} from './containers/public/';
 import { Routes, Route } from 'react-router-dom';
 import path from './util/path'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import * as actions from './store/actions'
+import * as actions from './store/actions';
+import {MyMusic} from './containers/system/'
 
 function App() {
   const dispatch = useDispatch();
@@ -16,10 +16,16 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={path.PUBLIC} element={<Public />}>
-          <Route path={path.HOME} element={<Home />}/>
-          <Route path={path.LOGIN} element={<Login />}/>
-          <Route path={path.STAR} element={<Home />}/>
+        <Route path={path.PUBLIC} element={<Public/>}>
+          <Route path={path.HOME} element={<Home/>}/>
+          <Route path={path.LOGIN} element={<Login/>}/>
+          <Route path={path.ZINGCHART} element={<Zingchart/>}/>
+          <Route path={path.RADIO} element={<Radio/>}/>
+          <Route path={path.MYMUSIC} element={<MyMusic/>}/>
+          <Route path={path.BXH} element={<BangXepHang/>}/>
+          <Route path={path.HUB} element={<Hub/>}/>
+          <Route path={path.TOP100} element={<Top100/>}/>
+          <Route path={path.STAR} element={<Home/>}/>
         </Route>
       </Routes>
       <ToastContainer

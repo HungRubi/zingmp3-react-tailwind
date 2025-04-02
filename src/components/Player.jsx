@@ -1,5 +1,5 @@
 import icons from '../util/icons';
-import {ButtonPlay} from '../components'
+import {ButtonMv, ButtonPlay} from '../components'
 const   {FaRegHeart, BsThreeDots,MdSkipNext,
         MdSkipPrevious,PiShuffle,PiRepeatLight, PiPlaylistBold, 
         IoVolumeMediumOutline, VscChromeRestore} = icons;
@@ -40,7 +40,7 @@ const Player = () => {
                     </h5>
                     <input 
                         type="range"
-                        className='flex-1'
+                        className='flex-1 h-[4px] bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[12px] [&::-webkit-slider-thumb]:h-[12px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0E8080] hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform [&::-moz-range-thumb]:w-[12px] [&::-moz-range-thumb]:h-[12px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0E8080] [&::-moz-range-thumb]:cursor-pointer hover:[&::-moz-range-thumb]:scale-110 [&::-moz-range-thumb]:transition-transform'
                         min={0} 
                         max={100} 
                     />
@@ -54,11 +54,11 @@ const Player = () => {
                     mv
                 </button>
                 <VscChromeRestore className='text-[20px] text-gray-500 cursor-pointer'/>
-                <div className="flex gap-2 5">
+                <div className="flex gap-2.5 items-center">
                     <IoVolumeMediumOutline className='text-2xl text-gray-500 cursor-pointer'/>
                     <input 
                         type="range"
-                        className='w-[75px] cursor-pointer' 
+                        className='w-[75px] h-[4px] bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[12px] [&::-webkit-slider-thumb]:h-[12px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0E8080] hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform [&::-moz-range-thumb]:w-[12px] [&::-moz-range-thumb]:h-[12px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0E8080] [&::-moz-range-thumb]:cursor-pointer hover:[&::-moz-range-thumb]:scale-110 [&::-moz-range-thumb]:transition-transform' 
                         min={0} 
                         max={100}
                     />
