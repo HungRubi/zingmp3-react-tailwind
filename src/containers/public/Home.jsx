@@ -31,28 +31,35 @@ const Home = () => {
                 <ListMusic
                     dataSinger={randumSinger}
                     data={songForFan}
-                    nameList={"nhạc hot thịnh hành"} 
                     classCard={"!w-1/5"} 
                     classIcon={"!gap-5"}
                     isAbum={"hidden"}
+                    type={"song"}
+                    isSinger={"hidden"}
                 />
                 <ListMusic 
                     isFan={"hidden"}
                     classCard={"!w-1/5"}
                     nameList={"top 100"}
                     data={top100}
+                    type={"album"}
+                    isSinger={"hidden"}
                 />
                 <ListMusic 
                     data={canSonglisten}
                     isFan={"hidden"}
                     classCard={"!w-1/5"}
                     nameList={"có thể bạn muốn nghe"}
+                    isSinger={"hidden"}
+                    type={"album"}
                 />
                 <ListMusic 
                     data={albumChill}
                     isFan={"hidden"}
                     classCard={"!w-1/5"}
                     nameList={"chill"}
+                    isSinger={"hidden"}
+                    type={"album"}
                 />
                 <ListMusicSize9 
                 data={songNew} 
@@ -87,6 +94,8 @@ const Home = () => {
                     isFan={"hidden"}
                     classCard={"!w-1/5"}
                     nameList={"album hot"}
+                    isSinger={"hidden"}
+                    type={"album"}
                 />
                 <ListRadio data={radio}/>
 
@@ -97,7 +106,7 @@ const Home = () => {
                         </h4>
                     </div>
                     <div className="w-full flex flex-wrap gap-5 mt-8">
-                        {partnor.map(item => (
+                        {partnor?.map(item => (
                             <div key={item._id} className="w-[calc(100%/8-18px)] bg-white rounded-lg flex items-center justify-center">
                                 <img src={item.img}
                                 className='object-contain w-1/2' 

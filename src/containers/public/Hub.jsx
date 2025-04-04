@@ -113,6 +113,8 @@ const Hub = () => {
                     isFan={"hidden"}
                     classCard={"!w-1/5"}
                     nameList={"album hot"}
+                    type={"album"}
+                    isSinger={"hidden"}
                 />
             </div>
         </div>

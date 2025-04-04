@@ -34,8 +34,12 @@ import { MdOutlinePrivacyTip } from "react-icons/md";
 import { PiFlagLight } from "react-icons/pi";
 import { IoCallOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import { BsPersonPlus } from "react-icons/bs";
+import { IoCheckmark } from "react-icons/io5";
 
 const icons = {
+    IoCheckmark,
+    BsPersonPlus,
     IoMdClose,
     IoCallOutline,
     PiFlagLight,

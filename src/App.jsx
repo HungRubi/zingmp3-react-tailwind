@@ -1,11 +1,12 @@
 import { ToastContainer } from 'react-toastify';
-import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100} from './containers/public/';
+import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100, AlbumDetail, SingerDetail} from './containers/public/';
 import { Routes, Route } from 'react-router-dom';
 import path from './util/path'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import * as actions from './store/actions';
 import {MyMusic} from './containers/system/'
+import MvDetail from './containers/public/MvDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
           <Route path={path.ZINGCHART} element={<Zingchart/>}/>
           <Route path={path.RADIO} element={<Radio/>}/>
           <Route path={path.MYMUSIC} element={<MyMusic/>}/>
+          <Route path={path.DETAILALBUM} element={<AlbumDetail/>}/>
+          <Route path={path.DETAILSINGER} element={<SingerDetail/>}/>
+          <Route path={path.DETAILMV} element={<MvDetail/>}/>
           <Route path={path.BXH} element={<BangXepHang/>}/>
           <Route path={path.HUB} element={<Hub/>}/>
           <Route path={path.TOP100} element={<Top100/>}/>

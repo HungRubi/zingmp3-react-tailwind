@@ -35,7 +35,7 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
             </div>
             <div className="w-full flex mt-5">
                 <div className="w-full flex gap-5 flex-wrap">
-                    {data.map(item => (
+                    {data?.map(item => (
                         <div key={item._id}
                         className="w-[calc(100%/3-14px)] p-2.5 rounded-[5px] flex text-left gap-2.5 items-center group hover:bg-[hsla(0,0%,100%,0.3)]">
                             <div className="h-15 w-15 relative overflow-hidden rounded-lg">

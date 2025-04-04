@@ -5,6 +5,8 @@ export {default as Search} from './Search';
 export {default as Slider} from './Slider';
 export {default as Player} from './Player';
 export {default as Modal} from './Modal';
+export {default as ModalMv} from './ModalMv';
+export {default as ModalSinger} from './ModalSinger';
 export {default as ListHub} from './ListHub';
 export {default as TableSong} from './TableSong';
 export {default as ButtonMv} from './ButtonMv';

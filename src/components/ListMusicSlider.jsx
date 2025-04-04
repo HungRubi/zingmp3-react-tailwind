@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 const ListMusicSlider = ({data}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    const part1 = data.slice(0, 3);
-    const part2 = data.slice(3, 6);
-    const part3 = data.slice(6, 8);
+    const part1 = data?.slice(0, 3);
+    const part2 = data?.slice(3, 6);
+    const part3 = data?.slice(6, 8);
     
     const slides = [part1, part2, part3];
 
@@ -33,7 +33,7 @@ const ListMusicSlider = ({data}) => {
             <div className="w-full flex mt-8 relative overflow-hidden">
                 <div className={`w-full flex transition-transform duration-500 ease-in-out ${isAnimating ? 'sliding' : ''}`}
                      style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-                    {slides.map((part, index) => (
+                    {slides?.map((part, index) => (
                         <div key={index} className="w-full flex flex-none gap-5">
                             {part?.map((item, itemIndex) => (
                                 <div key={itemIndex}

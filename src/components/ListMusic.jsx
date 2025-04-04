@@ -4,9 +4,27 @@ import icons from "../util/icons"
 import { NavLink } from 'react-router-dom';
 const { FaRegHeart,BsThreeDots,MdOutlineArrowForwardIos } = icons
 
-const ListMusic = ({classCard, nameList, classIcon, isAbum, isFan, dataSinger, data}) => {
+const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, classIcon, isAbum, isFan, dataSinger, data, type, classWrapper}) => {
+    const renderActionButton = (item) => {
+        if (type === 'album') {
+            return (
+                <NavLink to={`/album/${item.slug}`}>
+                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                </NavLink>
+            )
+        } else if (type === 'mv') {
+            return (
+                <NavLink to={`/mv/${item.slug}`}>
+                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                </NavLink>
+            )
+        } else {
+            // Trường hợp type === 'song' hoặc các type khác
+            return <ButtonPlay className="text-white !h-11 !w-11"/>
+        }
+    }
     return (
-        <div className="w-full mt-10">
+        <div className={`w-full mt-10 ${classWrapper}`}>
             <div className="w-full flex justify-between">
                 <div className={`w-full flex justify-between ${isAbum}`}>
                     <h2 className='capitalize text-2xl font-medium '>
@@ -33,7 +51,7 @@ const ListMusic = ({classCard, nameList, classIcon, isAbum, isFan, dataSinger, d
                     </div>
                 </div>
             </div>
-            <div className="w-full flex items-center flex-nowrap gap-5 mt-5">
+            <div className={`w-full flex items-center flex-nowrap gap-5 mt-5 ${classListCard}`}>
                 {data?.map(item => (
                     <div key={item._id} className={`w-1/7 flex flex-col gap-2.5 ${classCard}`}>
                         <div className="w-full relative rounded-lg overflow-hidden group">
@@ -48,21 +66,22 @@ const ListMusic = ({classCard, nameList, classIcon, isAbum, isFan, dataSinger, d
                                 <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
                                     <FaRegHeart className="text-lg text-white"/>
                                 </ButtonCricle>
-                                <NavLink to={`/album/${item.slug}`}>
-                                    <ButtonPlay className="text-white !h-11 !w-11"/>
-                                </NavLink>
+                                {renderActionButton(item)}
                                 <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
                                     <BsThreeDots className="text-lg text-white"/>
                                 </ButtonCricle>
                             </div>
                         </div>
-                        <div className="w-full">
-                            <h5 className='line-clamp-1 font-medium'>
-                                {item.name}
-                            </h5>
-                            <h6 className='line-clamp-1 text-sm text-gray-500'>
-                                {item.singer}
-                            </h6>
+                        <div className="w-full flex items-center">
+                            <img src={dataSinger?.img} alt="" className={`w-10 h-10 rounded-[50%] mr-2.5 ${isSinger}`}/>
+                            <div className={`${classSub}`}>
+                                <h5 className='line-clamp-1 font-medium capitalize'>
+                                    {item.name}
+                                </h5>
+                                <h6 className='line-clamp-1 text-sm text-gray-500'>
+                                    {item.singer}
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -80,6 +99,11 @@ ListMusic.propTypes = {
     isFan: PropTypes.node.isRequired,
     dataSinger: PropTypes.object,
     data: PropTypes.array,
+    type: PropTypes.string,
+    classWrapper: PropTypes.node,
+    classSub: PropTypes.node,
+    classListCard: PropTypes.node,
+    isSinger:PropTypes.node,
 }
 
 export default ListMusic

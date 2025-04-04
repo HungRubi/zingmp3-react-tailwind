@@ -9,6 +9,9 @@ const path = {
     BXH: 'bang-xep-hang',
     HUB: 'hub',
     TOP100: 'top100',   
+    DETAILALBUM: 'album/:slug',
+    DETAILSINGER: 'singer/:slug', 
+    DETAILMV: 'mv/:slug', 
 }
 
 export default path

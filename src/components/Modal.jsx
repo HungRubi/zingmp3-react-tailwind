@@ -36,8 +36,6 @@ const Modal = ({className}) => {
         dispatch(actions.login(formData));
     }
     const { message, loginError } = useSelector(state => state.app);
-    console.log(message);
-    console.log(loginError);
     useEffect(() => {
         if(message){
             toast.success(typeof message === 'string' ? message : JSON.stringify(message));

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 
 const {PiMusicNotesSimpleBold, FaPlay, FaHeart} = icons;
 
-const TableSong = ({isIndex, isMusic, isName, isIcon, isHeader, data}) => {
+const TableSong = ({classIndex, isIndex, isMusic, isName, isIcon, isHeader, data, className, isAlbum, classSong}) => {
     return (
-        <div className="w-full mt-8">
+        <div className={`w-full mt-8 ${className}`}>
             <div className={`w-full flex items-center text-sm font-medium text-gray-600 border-b border-[rgba(0,0,0,0.05)] h-[46px] p-2.5 ${isHeader}`}>
-                <div className="w-[40px]">{isName || ""}</div>
+                <div className={`w-[40px] ${classIndex}`}>{isName || ""}</div>
                 <div className="w-4/10 uppercase">bài hát</div>
                 <div className="w-4/10 uppercase">album</div>
                 <div className="w-2/10 uppercase text-right">thời gian</div>
@@ -16,14 +16,14 @@ const TableSong = ({isIndex, isMusic, isName, isIcon, isHeader, data}) => {
             {data?.map((item, index) => (
                 <div key={index} 
                 className="w-full flex items-center text-sm font-medium text-gray-600 border-b border-[rgba(0,0,0,0.05)] p-2.5 group hover:bg-[hsla(0,0%,100%,0.3)] transition duration-200">
-                    <div className="w-[40px]">
+                    <div className={`w-[40px] ${classIndex}`}>
                         <PiMusicNotesSimpleBold className={`text-[17px] text-gray-400 ${isMusic}`}/>
-                        <h4 className={`index_bxh !text-4xl ${isIndex}`}>
+                        <h4 className={`index_bxh font-bold !text-4xl ${isIndex} ${index === 0 ? "is-top-1" : ""} ${index === 1 ? "is-top-2" : ""} ${index === 2 ? "is-top-3" : ""}`}>
                             {index + 1}
                         </h4>
                     </div>
-                    <div className="w-4/10 flex gap-2 items-center">
-                        <div className="h-10 w-10 relative overflow-hidden rounded-sm">
+                    <div className={`w-4/10 flex gap-2 items-center  ${classSong}`}>
+                        <div className="h-10 w-10 relative overflow-hidden rounded-sm flex-none">
                             <img 
                                 src={item.img}
                                 alt={item.name} 
@@ -33,12 +33,12 @@ const TableSong = ({isIndex, isMusic, isName, isIcon, isHeader, data}) => {
                                 <FaPlay className="text-white text-lg"/>
                             </div>
                         </div>
-                        <div className="capitalize text-sm">
+                        <div className="capitalize text-sm pr-5">
                             <h4 className="text-base font-medium text-gray-700 line-clamp-1">{item.name}</h4>
                             <h5 className="font-[400] line-clamp-1">{item.singer}</h5>
                         </div>
                     </div>
-                    <div className="w-3/10 capitalize font-[400] text-gray-500 line-clamp-1">
+                    <div className={`w-3/10 capitalize font-[400] text-gray-500 line-clamp-1 ${isAlbum}`}>
                         {item.album}
                     </div>
                     <div className="w-3/10 uppercase text-right flex items-center justify-end gap-2.5">
@@ -54,11 +54,15 @@ const TableSong = ({isIndex, isMusic, isName, isIcon, isHeader, data}) => {
 
 TableSong.propTypes = {
     data: PropTypes.array,
+    className: PropTypes.node.isRequired,
     isHeader: PropTypes.node.isRequired,
     isIndex: PropTypes.node.isRequired,
     isMusic: PropTypes.node.isRequired,
     isIcon: PropTypes.node.isRequired,
-    isName: PropTypes.string.isRequired
+    isName: PropTypes.string.isRequired,
+    isAlbum: PropTypes.node.isRequired,
+    classSong: PropTypes.node.isRequired,
+    classIndex: PropTypes.node.isRequired,
 }
 
 export default TableSong

@@ -16,6 +16,23 @@ const initState = {
     currentUser: null,
     favoriteSong: [],
     favoriteAlbum: [],
+    detailAlbum : {},
+    songForAlbum: [],
+    singerForAlbum: [],
+    singerSuggest: [],
+    albumSuggest: [],
+    singerDetail: {},
+    songsForSinger: [],
+    albumForSinger: [],
+    album2ForSinger: [],
+    top100ForSinger: [],
+    mv: [],
+    mvDetail: {},
+    listMv: [],
+    singerForMv: {},
+    mvOfSinger: [],
+    songsBxh: [],
+    top100NoiBat: [],
 }
 
 const appReducer = (state = initState, action) => {
@@ -51,6 +68,49 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 message: null,
                 loginError: action.payload || null,
+            }
+
+        case actionType.DETAIL_ALBUM:
+            return {
+                ...state,
+                detailAlbum: action.payload?.album,
+                songForAlbum: action.payload?.songs,
+                singerForAlbum: action.payload?.singer,
+                singerSuggest: action.payload?.singerSuggest,
+                albumSuggest: action.payload?.albumSuggest,
+            }
+
+        case actionType.DETAIL_SINGER:
+            return {
+                ...state,
+                singerDetail: action.payload?.singer,
+                songsForSinger: action.payload?.songs,
+                albumForSinger: action.payload?.albums,
+                album2ForSinger: action.payload?.albums2,
+                top100ForSinger: action.payload?.getTop100,
+                singerSuggest: action.payload?.singerSuggest,
+                mv: action.payload?.randomMV
+            }
+
+        case actionType.DETAIL_MV:
+            return {
+                ...state,
+                mvDetail: action.payload?.mv,
+                listMv: action.payload?.mvs,
+                singerForMv: action.payload?.singer,
+                mvOfSinger: action.payload?.mvForSinger
+            }
+
+        case actionType.GET_BXH:
+            return {
+                ...state,
+                songsBxh: action.payload?.songs,
+            }
+        
+        case actionType.GET_TOP100:
+            return {
+                ...state,
+                top100NoiBat: action.payload?.albums,
             }
         default:
             return state

@@ -17,7 +17,7 @@ const ListRadio = ({data, isName}) => {
                 </div>
             </div>
             <div className="w-full mt-8 flex items-center gap-10">
-                {data.map(item => (
+                {data?.map(item => (
                     <div key={item._id} className="w-1/6">
                         <div className="w-full relative">
                             <div className="w-full relative rounded-[50%] overflow-hidden group border-5 border-red-500">
