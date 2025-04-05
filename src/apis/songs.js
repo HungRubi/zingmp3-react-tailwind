@@ -11,3 +11,16 @@ export const getAllSongs = async () => {
         console.log(error)
     }
 }
+
+export const updatePlayList = async (data) => {
+    try{
+        const response = await axios({
+            url: 'songs/update-playlist',
+            method: 'post',
+            data: data
+        })
+        return response
+    }catch(error){
+        console.log(error)
+    }
+}

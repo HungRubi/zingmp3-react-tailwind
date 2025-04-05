@@ -23,3 +23,27 @@ export const getAllSongs = () => async (dispatch) => {
         })
     }
 }
+
+export const updatePlaylist = (data) => async (dispatch) => {
+    try{
+        const response = await apis.updatePlayList(data);
+        if(response.status === 200) {
+            dispatch({
+                type: actionType.UPDATE_PLAYLIST,
+                payload: response.data
+            })
+        }
+        else{
+            dispatch({
+                type: actionType.UPDATE_PLAYLIST,
+                payload: null
+            })
+        }
+    }catch(error){
+        dispatch({
+            type: actionType.UPDATE_PLAYLIST,
+            payload: null,
+            error
+        })
+    }
+}

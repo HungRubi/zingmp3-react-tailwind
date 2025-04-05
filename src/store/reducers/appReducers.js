@@ -138,6 +138,13 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 allSongs: action.payload?.songs,
             }
+
+        case actionType.UPDATE_PLAYLIST:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteSong: action.payload?.favoriteSongs || null,
+            }
         default:
             return state
     }

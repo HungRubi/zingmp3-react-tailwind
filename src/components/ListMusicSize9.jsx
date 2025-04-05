@@ -81,8 +81,8 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
                                 </h6>
                             </div>
                             <div className="flex flex-none items-center gap-8">
-                                <FaHeart className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block'}`}/>
-                                <BsThreeDots className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block'}`}/>
+                                <FaHeart className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block text-[#1F8686]'}`}/>
+                                <BsThreeDots className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block text-[#1F8686]'}`}/>
                             </div>
                         </div>
                     ))}
