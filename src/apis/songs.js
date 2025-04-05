@@ -12,11 +12,24 @@ export const getAllSongs = async () => {
     }
 }
 
-export const updatePlayList = async (data) => {
+export const updatePlayList = async (data, id) => {
     try{
         const response = await axios({
-            url: 'songs/update-playlist',
+            url: `songs/update-playlist/${id}`,
             method: 'post',
+            data: data
+        })
+        return response
+    }catch(error){
+        console.log(error)
+    }
+}
+
+export const deletePlayList = async (data, id) => {
+    try{
+        const response = await axios({
+            url: `songs/delete-playlist/${id}`,
+            method: 'delete',
             data: data
         })
         return response

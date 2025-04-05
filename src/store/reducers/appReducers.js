@@ -145,6 +145,13 @@ const appReducer = (state = initState, action) => {
                 message: action.payload?.message || null,
                 favoriteSong: action.payload?.favoriteSongs || null,
             }
+
+        case actionType.DELETE_PLAYLIST:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteSong: action.payload?.favoriteSongs || null,
+            }
         default:
             return state
     }

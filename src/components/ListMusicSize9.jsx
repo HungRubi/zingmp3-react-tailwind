@@ -3,12 +3,20 @@ import {Button} from '../components';
 import * as actions from '../store/actions';
 import icons from '../util/icons';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import ButtonCircle from "./ButtonCricle";
 
-const {RiResetRightFill,FaPlay, FaHeart, BsThreeDots,MdOutlineArrowForwardIos} = icons
+const {RiResetRightFill,FaPlay, FaHeart, FaRegHeart, BsThreeDots,MdOutlineArrowForwardIos} = icons
 
 const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId} = useSelector(state => state.music);
+    const {currentUser} = useSelector(state => state.user);
+    const {favoriteSong, message} = useSelector(state => state.app);
+    if(message){
+        toast.success(message);
+        dispatch(actions.resetMessage());
+    }
 
     const handlePlay = (item) => {
         if (currentSongId === item._id) {
@@ -17,6 +25,19 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
             dispatch(actions.setCurrentSongId(item._id));
             dispatch(actions.play(true));
             dispatch(actions.addRecentSong(item));
+        }
+    }
+
+    const handleFavorite = async (item, user) => {
+        try {
+            const isFavorite = favoriteSong?.some(song => song._id === item._id);
+            if (isFavorite) {
+                await dispatch(actions.deletePlayList({ songId: item._id }, user));
+            } else {
+                await dispatch(actions.updatePlaylist({ songId: item._id }, user));
+            }
+        } catch (error) {
+            toast.error(error);
         }
     }
 
@@ -81,7 +102,21 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
                                 </h6>
                             </div>
                             <div className="flex flex-none items-center gap-8">
-                                <FaHeart className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block text-[#1F8686]'}`}/>
+                                {favoriteSong?.some(song => song._id === item._id) ? (
+                                    <ButtonCircle onClick={() => handleFavorite(item,currentUser?._id)}
+                                    className={"!h-8 !w-8 bg-transparent hover:bg-[#908e8e27] hidden group-hover:flex"}>
+                                        <FaHeart 
+                                            className={`text-[#1F8686] cursor-pointer mt-[1px]`}
+                                        />
+                                    </ButtonCircle>
+                                ) : (
+                                    <ButtonCircle onClick={() => handleFavorite(item,currentUser?._id)}
+                                    className={"!h-8 !w-8 bg-transparent hover:bg-[#908e8e27] hidden group-hover:flex"}>
+                                        <FaRegHeart 
+                                            className={`text-gray-500 cursor-pointer mt-[1px]`}
+                                        />
+                                    </ButtonCircle>
+                                )}
                                 <BsThreeDots className={`${currentSongId === item._id && isPlaying ? 'block text-[#1F8686]' : 'hidden group-hover:block text-[#1F8686]'}`}/>
                             </div>
                         </div>

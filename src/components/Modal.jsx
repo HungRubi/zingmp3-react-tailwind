@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import {Button} from '../components';
 import * as actions from '../store/actions';
 import { toast } from 'react-toastify';
@@ -10,6 +9,8 @@ import PropTypes from 'prop-types';
 
 const Modal = ({className}) => {
     const [isShow, setIsShow] = useState(false)
+    const dispatch = useDispatch();
+    const { message, loginError } = useSelector(state => state.app);
 
     const handleClose = () => {
         setIsShow(false)
@@ -18,30 +19,30 @@ const Modal = ({className}) => {
     const handleOpen = () => {
         setIsShow(true)
     }
-    const dispatch = useDispatch();
     
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     })
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         })
     }
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(actions.login(formData));
+        await dispatch(actions.login(formData));
     }
-    const { message, loginError } = useSelector(state => state.app);
+
     useEffect(() => {
         if(message){
-            toast.success(typeof message === 'string' ? message : JSON.stringify(message));
-            navigate("/");
+            toast.success(message);
+            dispatch(actions.resetMessage());
         }
-    }, [message, navigate])
+    }, [message, dispatch])
 
     return (
         <>

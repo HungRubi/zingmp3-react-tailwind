@@ -1,14 +1,25 @@
 import icons from "../util/icons";
-import ButtonMv from "./ButtonMv";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
+import { toast } from 'react-toastify';
+import ButtonCircle from "./ButtonCricle";
+import { useEffect } from 'react';
 
-const {PiMusicNotesSimpleBold, FaPlay, FaHeart} = icons;
+const {PiMusicNotesSimpleBold, FaPlay, FaHeart, FaRegHeart} = icons;
 
 const TableSong = ({classIndex, isIndex, isMusic, isName, isIcon, isHeader, data, className, isAlbum, classSong}) => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId} = useSelector(state => state.music);
+    const {currentUser} = useSelector(state => state.user);
+    const {favoriteSong, message} = useSelector(state => state.app);
+
+    useEffect(() => {
+        if(message){
+            toast.success(message);
+            dispatch(actions.resetMessage());
+        }
+    }, [message, dispatch]);
 
     const handlePlay = (item) => {
         if (currentSongId === item._id) {
@@ -18,6 +29,19 @@ const TableSong = ({classIndex, isIndex, isMusic, isName, isIcon, isHeader, data
             dispatch(actions.setCurrentSong(item));
             dispatch(actions.play(true));
             dispatch(actions.addRecentSong(item));
+        }
+    }
+
+    const handleFavorite = async (item, user) => {
+        try {
+            const isFavorite = favoriteSong?.some(song => song._id === item._id);
+            if (isFavorite) {
+                await dispatch(actions.deletePlayList({ songId: item._id }, user));
+            } else {
+                await dispatch(actions.updatePlaylist({ songId: item._id }, user));
+            }
+        } catch (error) {
+            toast.error(error);
         }
     }
 
@@ -66,9 +90,22 @@ const TableSong = ({classIndex, isIndex, isMusic, isName, isIcon, isHeader, data
                     <div className={`w-3/10 capitalize font-[400] text-gray-500 line-clamp-1 ${isAlbum}`}>
                         {item.album}
                     </div>
-                    <div className="w-3/10 uppercase text-right flex items-center justify-end gap-2.5">
-                        <ButtonMv className={`hidden group-hover:block ${isIcon}`}/>
-                        <FaHeart className={`${currentSongId === item._id && isPlaying ? 'text-[#1F8686]' : 'text-[#218787] ml-10'} ${isIcon}`}/>
+                    <div className="w-3/10 uppercase text-right flex items-center justify-end gap-6">
+                        {favoriteSong?.some(song => song._id === item._id) ? (
+                            <ButtonCircle onClick={() => handleFavorite(item,currentUser?._id)}
+                            className={"!h-8 !w-8 bg-transparent hover:bg-[#908e8e27] hidden group-hover:flex"}>
+                                <FaHeart 
+                                    className={`text-[#1F8686] cursor-pointer ${isIcon} mt-[1px]`}
+                                />
+                            </ButtonCircle>
+                        ) : (
+                            <ButtonCircle onClick={() => handleFavorite(item,currentUser?._id)}
+                            className={"!h-8 !w-8 bg-transparent hover:bg-[#908e8e27] hidden group-hover:flex"}>
+                                <FaRegHeart 
+                                    className={`text-gray-500 cursor-pointer ${isIcon} mt-[1px]`}
+                                />
+                            </ButtonCircle>
+                        )}
                         <div className="w-[46px] text-sm text-gray-500 font-[400]">04:08</div>
                     </div>
                 </div>
