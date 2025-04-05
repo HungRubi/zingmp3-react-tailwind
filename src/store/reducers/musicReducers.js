@@ -34,13 +34,13 @@ const musicReducers = (state = initState, action) => {
                 const filteredSongs = state.recentSongs.filter(song => song._id !== action.song._id);
                 return {
                     ...state,
-                    recentSongs: [action.song, ...filteredSongs].slice(0, 20) // Giới hạn 20 bài
+                    recentSongs: [action.song, ...filteredSongs].slice(0, 15) // Giới hạn 15 bài
                 };
             }
             // Nếu chưa có, thêm vào đầu danh sách
             return {
                 ...state,
-                recentSongs: [action.song, ...state.recentSongs].slice(0, 20) // Giới hạn 20 bài
+                recentSongs: [action.song, ...state.recentSongs].slice(0, 15) // Giới hạn 15 bài
             };
         }
         default:

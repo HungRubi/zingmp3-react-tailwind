@@ -3,10 +3,10 @@ import {ButtonPlay} from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../store/actions';
 import { useEffect, useRef, useState } from 'react';
-
+import { NavLink } from 'react-router-dom';
 const {FaRegHeart, BsThreeDots,MdSkipNext,FaPlay,BsFillPauseFill,
         MdSkipPrevious,PiShuffle,PiRepeatLight, PiPlaylistBold, 
-        IoVolumeMediumOutline, VscChromeRestore} = icons;
+        IoVolumeMediumOutline, VscChromeRestore, BsVolumeMute} = icons;
 
 const Player = () => {
     const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const Player = () => {
     const audioRef = useRef();
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [volume, setVolume] = useState(100);
 
     // Find current song from allSongs
     const currentSong = allSongs?.find(song => song._id === currentSongId);
@@ -158,6 +159,14 @@ const Player = () => {
         }
     }
 
+    const handleVolumeChange = (e) => {
+        const newVolume = parseInt(e.target.value);
+        setVolume(newVolume);
+        if (audioRef.current) {
+            audioRef.current.volume = newVolume / 100;
+        }
+    }
+
     // Handle song ended
     useEffect(() => {
         const handleEnded = () => {
@@ -203,7 +212,8 @@ const Player = () => {
                     <img 
                         src={currentSong?.img || "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/3/6/9/a/369adae3c5e6ffb93f7d4c6d17b7a3d2.jpg"} 
                         alt="Player"
-                        className="w-full object-cover rounded-sm" 
+                        className={`w-full object-cover rounded-[50%] ${isPlaying ? 'animate-spin' : ''}`}
+                        style={{ animationDuration: '8s' }}
                     />
                 </div>
                 <div className="leading-5 w-1/3">
@@ -268,18 +278,30 @@ const Player = () => {
                 </div>
             </div>
             <div className="w-3/10 flex justify-end gap-4 items-center">
-                <button className='text-[8px] uppercase border-[2px] cursor-pointer border-gray-400 text-gray-500 rounded-[6px] font-medium p-[2px]'>
+                <NavLink to={`/mv`} className='text-[8px] uppercase border-[2px] cursor-pointer border-gray-400 text-gray-500 rounded-[6px] font-medium p-[2px]'>
                     mv
-                </button>
+                </NavLink>
                 <VscChromeRestore className='text-[20px] text-gray-500 cursor-pointer'/>
                 <div className="flex gap-2.5 items-center">
-                    <IoVolumeMediumOutline className='text-2xl text-gray-500 cursor-pointer'/>
-                    <input 
-                        type="range"
-                        className='w-[75px] h-[4px] bg-gray-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[12px] [&::-webkit-slider-thumb]:h-[12px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#0E8080] hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform [&::-moz-range-thumb]:w-[12px] [&::-moz-range-thumb]:h-[12px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#0E8080] [&::-moz-range-thumb]:cursor-pointer hover:[&::-moz-range-thumb]:scale-110 [&::-moz-range-thumb]:transition-transform' 
-                        min={0} 
-                        max={100}
-                    />
+                    {volume === 0 ? (
+                        <BsVolumeMute className='text-[26px] text-gray-500 cursor-pointer'/>
+                    ) : (
+                        <IoVolumeMediumOutline className='text-2xl text-gray-500 cursor-pointer'/>
+                    )}
+                    <div className="relative h-[5px] w-[75px] mx-[10px] rounded-[50px] bg-[rgba(246,246,252,0.322)]">
+                        <div 
+                            className="absolute h-full rounded-[50px] bg-[#218888] left-0"
+                            style={{ width: `${volume}%` }}
+                        />
+                        <input 
+                            type="range"
+                            className="absolute w-full h-[10px] cursor-pointer z-[999] opacity-0 transition-[0.3s_linear]"
+                            min={0}
+                            max={100}
+                            value={volume}
+                            onChange={handleVolumeChange}
+                        />
+                    </div>
                 </div>
                 <div className="h-8 border border-[rgba(0,0,0,0.05)]"></div>
                 <button className='h-8 flex items-center justify-center w-8 rounded-sm bg-[#0E8080] cursor-pointer'>

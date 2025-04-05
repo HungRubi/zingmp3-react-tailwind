@@ -38,8 +38,10 @@ import { IoCallOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { BsPersonPlus } from "react-icons/bs";
 import { IoCheckmark } from "react-icons/io5";
+import { BsVolumeMute } from "react-icons/bs";
 
 const icons = {
+    BsVolumeMute,
     BsFillPauseFill,
     IoPauseOutline,
     IoCheckmark,
@@ -79,7 +81,8 @@ const icons = {
     IoSettingsOutline,
     GoArrowLeft,
     GoArrowRight,
-    GoSearch
+    GoSearch,
+    
 };
 
 export default icons;

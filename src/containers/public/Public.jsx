@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom"
 import { Player, SidebarLeft, SidebarRight, Header } from "../../components"
 import { useState, useEffect, useRef } from "react"
+import { useSelector } from "react-redux"
 
 const Public = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const mainContainerRef = useRef(null)
+    const { currentSongId } = useSelector(state => state.music)
 
     useEffect(() => {
         const mainContainer = mainContainerRef.current
@@ -25,23 +27,23 @@ const Public = () => {
                 <div className="w-[240px] flex-none">
                     <SidebarLeft/>
                 </div>
-                <div ref={mainContainerRef} className="bg-[#CED9D9] h-[calc(100vh-90px)] overflow-y-scroll pb-10 relative flex-auto 
+                <div ref={mainContainerRef} className={`bg-[#CED9D9] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} overflow-y-scroll pb-10 relative flex-auto 
                     [&::-webkit-scrollbar]:w-1 
                     [&::-webkit-scrollbar-track]:bg-transparent 
                     [&::-webkit-scrollbar-thumb]:bg-[#0000001a] 
                     [&::-webkit-scrollbar-thumb]:rounded-full 
-                    hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]"
+                    hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]`}
                 >
                     <div className={`h-[70px] px-[59px] sticky top-0 z-50 ${isScrolled ? 'scroll_sidebar' : ''}`}>
                         <Header/>
                     </div>
                     <Outlet />
                 </div>
-                <div className="w-[329px] h-[calc(100vh-90px)] flex-none box-shadow-left border-l border-[rgba(0,0,0,0.25)]">
+                <div className={`w-[329px] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} flex-none box-shadow-left border-l border-[rgba(0,0,0,0.25)]`}>
                     <SidebarRight/>
                 </div>
             </div>
-            <div className="flex-none h-[90px] bg-main-300 border-player">
+            <div className={`flex-none h-[90px] bg-main-300 border-player transition-transform duration-500 ease-in-out ${!currentSongId ? '-translate-y-full' : 'translate-y-0'}`}>
                 <Player/>
             </div>
         </div>

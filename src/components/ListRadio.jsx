@@ -2,7 +2,7 @@ import icons from "../util/icons";
 import {ButtonPlay} from '../components'
 import PropTypes from "prop-types";
 
-const {MdOutlineArrowForwardIos} = icons;
+const {MdOutlineArrowForwardIos, FaPlay} = icons;
 
 const ListRadio = ({data, isName}) => {
     return (
@@ -29,7 +29,9 @@ const ListRadio = ({data, isName}) => {
                                 <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
                                 items-center justify-center gap-3 flex transform scale-0 transition-transform 
                                 duration-500 ease-in-out group-hover:scale-100 rounded-[50%]`}>
-                                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                                    <ButtonPlay className="text-white !h-11 !w-11 flex-none">
+                                        <FaPlay className="ml-1" />
+                                    </ButtonPlay>
                                 </div>
                                 
                             </div>

@@ -15,13 +15,17 @@ const Home = () => {
         albumChill, 
         topSong
     } = useSelector(state => state.app);
-    
+    const {recentSongs} = useSelector(state => state.music)
     return (
         <>
             <div className="w-full px-[59px] backgroundColor-main-100">
                 <Slider/>
                 <Advertisement/>
-                <ListMusic isFan={"hidden"}/>
+                <ListMusic 
+                    isFan={"hidden"}
+                    data={recentSongs?.slice(0, 7)}
+                    isSinger={"hidden"}  
+                />
                 <ListMusicSize9
                     data={songSuggest} 
                     nameList={"gợi ý cho bạn "} i

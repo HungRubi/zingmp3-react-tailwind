@@ -88,7 +88,7 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                                 <h5 className='line-clamp-1 font-medium capitalize'>
                                     {item.name}
                                 </h5>
-                                <h6 className='line-clamp-1 text-sm text-gray-500'>
+                                <h6 className='line-clamp-1 text-sm text-gray-500 capitalize'>
                                     {item.singer}
                                 </h6>
                             </div>
