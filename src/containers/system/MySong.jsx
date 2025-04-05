@@ -10,7 +10,7 @@ const MySong = () => {
     const handleButtonClick = (buttonType) => {
         setActiveButton(buttonType)
     }
-    const { favoriteSong } = useSelector(state => state.app);
+    const { favoriteSong } = useSelector(state => state.user);
     return (
         <div className="w-full mt-8">
             <div className="flex items-center gap-5">

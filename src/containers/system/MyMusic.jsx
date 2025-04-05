@@ -3,7 +3,7 @@ import {ListSingerFollower, ListMusic} from '../../components';
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 import { MySong } from '../system';
 const MyMusic = () => {
-    const {favoriteAlbum} = useSelector(state => state.app);
+    const {favoriteAlbum} = useSelector(state => state.user);
     const formatAlbum = favoriteAlbum?.slice(0, 5);
     const tabs = [
         {

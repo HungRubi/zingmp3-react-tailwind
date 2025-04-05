@@ -1,6 +1,8 @@
 import actionType from "../actions/actionTypes";
 
 const initState = {
+    message: null,
+    loginError: null,
     banners: [],
     songSuggest: [],
     songNew: [],
@@ -14,8 +16,8 @@ const initState = {
     albumChill: [],
     topSong: [],
     currentUser: null,
-    favoriteSong: [],
-    favoriteAlbum: [],
+    favoriteSong: null,
+    favoriteAlbum: null,
     detailAlbum : {},
     songForAlbum: [],
     singerForAlbum: [],
@@ -33,6 +35,8 @@ const initState = {
     mvOfSinger: [],
     songsBxh: [],
     top100NoiBat: [],
+    accessToken: null,
+    allSongs: [],
 }
 
 const appReducer = (state = initState, action) => {
@@ -59,9 +63,18 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 currentUser: action.payload?.user || null,
                 message: action.payload?.message || null,
-                favoriteSong: action.payload?.favoriteSongs || [],
-                favoriteAlbum: action.payload?.favoriteAlbums || [],
+                favoriteSong: action.payload?.favoriteSongs || null,
+                favoriteAlbum: action.payload?.favoriteAlbums || null,
+                accessToken: action.payload?.accessToken || null,
                 loginError: null
+            }
+        case actionType.LOGOUT:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                currentUser: null,
+                favoriteSong: null,
+                favoriteAlbum: null,
             }
         case actionType.LOGIN_FAIL:
             return {
@@ -111,6 +124,19 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 top100NoiBat: action.payload?.albums,
+            }
+
+        case actionType.RESET_MESSAGE:
+            return {
+                ...state,
+                message: null,
+                loginError: null
+            }
+        
+        case actionType.GET_ALL_SONGS:
+            return {
+                ...state,
+                allSongs: action.payload?.songs,
             }
         default:
             return state

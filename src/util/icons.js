@@ -1,4 +1,6 @@
 import { MdOutlineLibraryMusic } from 'react-icons/md';
+import { BsFillPauseFill } from "react-icons/bs";
+import { IoPauseOutline } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
 import { GoArrowRight } from "react-icons/go";
 import { GoSearch } from "react-icons/go";
@@ -38,6 +40,8 @@ import { BsPersonPlus } from "react-icons/bs";
 import { IoCheckmark } from "react-icons/io5";
 
 const icons = {
+    BsFillPauseFill,
+    IoPauseOutline,
     IoCheckmark,
     BsPersonPlus,
     IoMdClose,

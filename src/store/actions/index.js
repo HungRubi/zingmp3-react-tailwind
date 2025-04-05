@@ -5,3 +5,6 @@ export * from './singer';
 export * from './mv';
 export * from './bxh';
 export * from './top100';
+export * from './user';
+export * from './music';
+export * from './songs';

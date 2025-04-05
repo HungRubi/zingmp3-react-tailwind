@@ -1,8 +1,9 @@
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100, AlbumDetail, SingerDetail} from './containers/public/';
 import { Routes, Route } from 'react-router-dom';
 import path from './util/path'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import * as actions from './store/actions';
 import {MyMusic} from './containers/system/'
@@ -10,10 +11,15 @@ import MvDetail from './containers/public/MvDetail';
 
 function App() {
   const dispatch = useDispatch();
+  const { currentUser,favoriteSong,favoriteAlbum,accessToken } = useSelector(state => state.app);
   useEffect(() => {
-    dispatch(actions.getHome())
-  }, [dispatch])
-  
+    dispatch(actions.getHome());
+    if(currentUser && favoriteSong && favoriteAlbum) {
+      dispatch(actions.setCurrentUser(currentUser,favoriteSong,favoriteAlbum));
+    }
+
+  }, [dispatch, currentUser, favoriteSong, favoriteAlbum]);
+  console.log('accessToken', accessToken);
   return (
     <>
       <Routes>
@@ -34,10 +40,10 @@ function App() {
       </Routes>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick={false}
+        closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable

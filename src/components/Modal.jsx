@@ -42,6 +42,7 @@ const Modal = ({className}) => {
             navigate("/");
         }
     }, [message, navigate])
+
     return (
         <>
             <Button 
@@ -88,7 +89,7 @@ const Modal = ({className}) => {
                                     className='w-full h-10 px-3 rounded-lg border border-[rgba(0,0,0,0.1)] bg-[#fff] text-sm outline-none transition-all'
                                 />
                             </div>
-                            <h6 className='text-red-500 text-sm'>{loginError ? "Sai tài khoản hoặc mật khẩu" : ""}</h6>
+                            <h6 className='text-red-500 text-[12px] text-left'>{loginError ? "Sai tài khoản hoặc mật khẩu" : ""}</h6>
                             <Button type="submit" className={"mt-5 !bg-[#218888] text-white w-full"}>
                                 Đăng nhập
                             </Button>

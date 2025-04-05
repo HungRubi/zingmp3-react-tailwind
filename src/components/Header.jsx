@@ -4,7 +4,9 @@ import {Basic, Download, Plus, Premium} from '../util/iconSgv'
 import TrinhPhatNhac from '../util/iconSgv/TrinhPhatNhac'
 import GiaoDien from '../util/iconSgv/GiaoDien'
 import { useState, useRef, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
+import * as actions from '../store/actions'
+import { toast } from 'react-toastify'
 
 const { GoArrowRight, GoArrowLeft, IoSettingsOutline, 
     MdBlockFlipped, RxUpload, FiLogOut, GoChevronRight,
@@ -12,7 +14,7 @@ const { GoArrowRight, GoArrowLeft, IoSettingsOutline,
     PiFlagLight, IoCallOutline } = icons
 
 const Header = () => {
-    const {currentUser} = useSelector(state => state.app)
+    const {currentUser, message} = useSelector(state => state.user)
     const [showSettingMenu, setShowSettingMenu] = useState(false)
     const [showUserMenu, setShowUserMenu] = useState(false)
     const settingRef = useRef(null)
@@ -36,7 +38,15 @@ const Header = () => {
     const handleMenuClick = (e) => {
         e.stopPropagation() // Ngăn sự kiện lan truyền
     }
-
+    const dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(actions.logout(currentUser?.accessToken));
+        dispatch(actions.logoutPersist());
+        toast.success(message);
+        setTimeout(() => {
+            dispatch(actions.resetMessage());    
+        }, 1000)
+    }
     return(
         <div className="flex items-center justify-between w-full h-full">
             <div className="flex items-center gap-8">
@@ -123,14 +133,19 @@ const Header = () => {
                         className={"relative"}
                         onClick={() => setShowUserMenu(!showUserMenu)}
                     >
-                        {currentUser ? (
+                        {currentUser && JSON.stringify(currentUser) !== "{}" ? (
                             <img src={currentUser?.img} alt="" className='rounded-[50%]'/>
                         ) : (
                             <img src="/img/default.png" alt="" className='rounded-[50%]'/>
                         )}
-                        {currentUser ? (
+                        {currentUser && JSON.stringify(currentUser) !== "{}" ? (
                             <div onClick={handleMenuClick}
-                            className={`absolute p-[6px] ${showUserMenu ? '' : 'hidden'} rounded-sm w-[300px] h-[calc(100vh-200px)] bg-[#e0ebeb] shadow-[0_0_5px_rgba(0,0,0,0.2)] top-[120%] right-0 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#0000001a] [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]`}>
+                            className={`absolute p-[6px] ${showUserMenu ? '' : 'hidden'} text-left rounded-sm w-[300px] h-[calc(100vh-200px)] bg-[#e0ebeb] shadow-[0_0_5px_rgba(0,0,0,0.2)] top-[120%] right-0 overflow-y-auto 
+                                        [&::-webkit-scrollbar]:w-1 
+                                        [&::-webkit-scrollbar-track]:bg-transparent 
+                                        [&::-webkit-scrollbar-thumb]:bg-[#0000001a] 
+                                        [&::-webkit-scrollbar-thumb]:rounded-full 
+                                        hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]`}>
                                 <div className="p-2.5 mb-2.5">
                                     <div className="flex flex-col justify-center">
                                         <div className="mb-4 flex items-center gap-2.5 w-full">
@@ -199,7 +214,7 @@ const Header = () => {
                                 <div className=" px-2.5">
                                     <div className="bg-[rgba(0,0,0,0.1)] my-2.5 w-full h-[1px]"></div>
                                 </div>
-                                <div className="py-3 px-2.5 h-11 flex gap-2.5 group hover:bg-[hsla(0,0%,100%,0.3)]">
+                                <div className="py-3 px-2.5 h-11 flex gap-2.5 group hover:bg-[hsla(0,0%,100%,0.3)]" onClick={handleLogout}>
                                     <FiLogOut className='text-2xl text-gray-600 group-hover:text-[#0e8080]'/>
                                     <h5 className='text-gray-600 font-[400] group-hover:text-[#0e8080]'>Đăng xuất</h5>
                                 </div>

@@ -7,7 +7,22 @@ export const login = async (data) => {
             method: "post",
             data: data,
         });
-        console.log(response)
+        return response;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
+
+export const logout = async (token) => {
+    try {
+        const response = await axios({
+            url: "authen/logout",
+            method: "post",
+            headers: {
+               token: `Bearer ${token}`, 
+            }
+        });
         return response;
     } catch (err) {
         console.log(err);

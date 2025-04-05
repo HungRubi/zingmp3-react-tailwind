@@ -10,7 +10,7 @@ const {LuPlus} = icons
 const notActive = 'py-[12px] px-[25px] flex items-center gap-[12px] text-[#32323D]';
 const active = 'py-[12px] px-[25px] flex items-center gap-[12px] text-[#0F7070]';
 const SidebarLeft = () => {
-    const {currentUser} = useSelector(state => state.app);
+    const {currentUser} = useSelector(state => state.user);
 
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollContainerRef = useRef(null);
@@ -67,9 +67,9 @@ const SidebarLeft = () => {
                     </div>
                     <div className="my-4 py-[15px] px-[8px] rounded-lg mx-[20px] bg-radient">
                         <h6 className="text-[12px] line-clamp-2 text-center mb-2.5 font-medium text-white">
-                            {currentUser ? "Nghe nhạc không quảng cáo cùng kho nhạc PREMIUM" : "Đăng nhập để khám phá playlist dành riêng cho bạn"}
+                            {currentUser && JSON.stringify(currentUser) !== "{}" ? "Nghe nhạc không quảng cáo cùng kho nhạc PREMIUM" : "Đăng nhập để khám phá playlist dành riêng cho bạn"}
                         </h6>
-                        {currentUser ? (
+                        {currentUser && JSON.stringify(currentUser) !== "{}" ? (
                             <Button className={"!bg-[#ffdb00] uppercase text-[12px] !font-[600] text-gray-600"}>
                                 Nâng cấp tài khoản
                             </Button>
@@ -78,7 +78,7 @@ const SidebarLeft = () => {
                         )}
                         
                     </div>
-                    {currentUser ? (
+                    {currentUser && JSON.stringify(currentUser) !== "{}" ? (
                         <>
                             <div className="flex flex-col">
                                 {menuSide3.map(item => (

@@ -37,7 +37,7 @@ const Public = () => {
                     </div>
                     <Outlet />
                 </div>
-                <div className="w-[329px] flex-none box-shadow-left border-l border-[rgba(0,0,0,0.25)]">
+                <div className="w-[329px] h-[calc(100vh-90px)] flex-none box-shadow-left border-l border-[rgba(0,0,0,0.25)]">
                     <SidebarRight/>
                 </div>
             </div>

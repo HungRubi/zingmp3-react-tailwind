@@ -1,19 +1,19 @@
 import { ButtonCricle } from '../components';
 import PropTypes from 'prop-types';
-import icons from '../util/icons';
-const { MdPlayArrow } = icons;
 
-const ButtonPlay = ({ className, classIcon }) => {
+
+const ButtonPlay = ({ className, children,onClick }) => {
     return (
-        <ButtonCricle className={`bg-transparent border !h-9 !w-9 ${className}`}>
-            <MdPlayArrow className={`text-2xl ${classIcon}`} />
+        <ButtonCricle onClick={onClick} className={`bg-transparent border !h-10 !w-10 ${className}`}>
+            {children}
         </ButtonCricle>
     );
 };
 
 ButtonPlay.propTypes = {
     className: PropTypes.string.isRequired,
-    classIcon: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func,
 };
 
 export default ButtonPlay;

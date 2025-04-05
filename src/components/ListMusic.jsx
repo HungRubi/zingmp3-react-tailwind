@@ -2,25 +2,35 @@ import {ButtonCricle, ButtonPlay} from '../components'
 import PropTypes from 'prop-types';
 import icons from "../util/icons"
 import { NavLink } from 'react-router-dom';
-const { FaRegHeart,BsThreeDots,MdOutlineArrowForwardIos } = icons
+import { useDispatch } from 'react-redux';
+import * as actions from '../store/actions';
+const { FaRegHeart,BsThreeDots,MdOutlineArrowForwardIos,FaPlay } = icons
 
 const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, classIcon, isAbum, isFan, dataSinger, data, type, classWrapper}) => {
+    const dispatch = useDispatch();
     const renderActionButton = (item) => {
         if (type === 'album') {
             return (
                 <NavLink to={`/album/${item.slug}`}>
-                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                    <ButtonPlay className="text-white !h-11 !w-11">
+                        <FaPlay className={`text-lg ml-1`} />
+                    </ButtonPlay>
                 </NavLink>
             )
         } else if (type === 'mv') {
             return (
                 <NavLink to={`/mv/${item.slug}`}>
-                    <ButtonPlay className="text-white !h-11 !w-11"/>
+                    <ButtonPlay className="text-white !h-11 !w-11">
+                        <FaPlay className={`text-lg ml-1`} />
+                    </ButtonPlay>
                 </NavLink>
             )
         } else {
-            // Trường hợp type === 'song' hoặc các type khác
-            return <ButtonPlay className="text-white !h-11 !w-11"/>
+            return (
+                <ButtonPlay onClick={() => dispatch(actions.play(true))} className="text-white !h-11 !w-11">
+                    <FaPlay className={`text-lg ml-1`} />
+                </ButtonPlay>
+            )
         }
     }
     return (
