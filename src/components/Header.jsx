@@ -40,13 +40,15 @@ const Header = () => {
     }
     const dispatch = useDispatch()
     const handleLogout = () => {
-        dispatch(actions.logout(currentUser?.accessToken));
         dispatch(actions.logoutPersist());
-        toast.success(message);
-        setTimeout(() => {
-            dispatch(actions.resetMessage());    
-        }, 1000)
+        dispatch(actions.logoutMusic());
     }
+    useEffect(() => {
+        if(message){
+            toast.success(message);
+            dispatch(actions.resetMessage());
+        }
+    }, [])
     return(
         <div className="flex items-center justify-between w-full h-full">
             <div className="flex items-center gap-8">

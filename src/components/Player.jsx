@@ -200,7 +200,7 @@ const Player = () => {
     }, [currentSongId, recentSongs, allSongs, autoPlay, isShuffle, isRepeat, dispatch]);
 
     return (
-        <div className="w-full h-full px-5 flex">
+        <div className={`w-full h-full px-5 flex transition-transform duration-500 ease-in-out ${!currentSongId ? 'translate-y-50' : 'translate-y-0'}`}>
             <audio 
                 ref={audioRef}
                 src={currentSong?.music}
@@ -210,16 +210,16 @@ const Player = () => {
             <div className="w-3/10 flex items-center gap-2.5">
                 <div className="w-[64px] h-[64px]">
                     <img 
-                        src={currentSong?.img || "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/3/6/9/a/369adae3c5e6ffb93f7d4c6d17b7a3d2.jpg"} 
+                        src={currentSong?.img} 
                         alt="Player"
                         className={`w-full object-cover rounded-[50%] ${isPlaying ? 'animate-spin' : ''}`}
                         style={{ animationDuration: '8s' }}
                     />
                 </div>
                 <div className="leading-5 w-1/3">
-                    <h5 className="capitalize font-medium text-gray-700 line-clamp-1">{currentSong?.name || "Anh sai rồi"}</h5>
+                    <h5 className="capitalize font-medium text-gray-700 line-clamp-1">{currentSong?.name}</h5>
                     <span className="text-gray-500 text-sm line-clamp-1">
-                        {currentSong?.singer || "Sơn Tùng MTP"}
+                        {currentSong?.singer}
                     </span>
                 </div>
                 <div className="flex-none flex gap-8">

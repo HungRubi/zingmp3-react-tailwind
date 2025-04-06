@@ -2,12 +2,28 @@ import {ButtonCricle, ButtonPlay} from '../components'
 import PropTypes from 'prop-types';
 import icons from "../util/icons"
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
-const { FaRegHeart,BsThreeDots,MdOutlineArrowForwardIos,FaPlay } = icons
+import { toast } from 'react-toastify';
+const { FaRegHeart, FaHeart, BsThreeDots, MdOutlineArrowForwardIos, FaPlay } = icons
 
 const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, classIcon, isAbum, isFan, dataSinger, data, type, classWrapper}) => {
     const dispatch = useDispatch();
+    const {currentUser, favoriteAlbum} = useSelector(state => state.user);
+    
+    const handleFavoriteAlbum = async (item, user) => {
+        try {
+            const isFavorite = favoriteAlbum?.some(album => album._id === item._id);
+            if (isFavorite) {
+                await dispatch(actions.deleteFavoriteAlbum({ albumId: item._id }, user));
+            } else {
+                await dispatch(actions.updateFavoriteAlbum({ albumId: item._id }, user));
+            }
+        } catch (error) {
+            toast.error(error);
+        }
+    }
+
     const renderActionButton = (item) => {
         if (type === 'album') {
             return (
@@ -73,9 +89,22 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                             <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
                             items-center justify-center gap-3 flex transform scale-0 transition-transform 
                             duration-500 ease-in-out group-hover:scale-100 ${classIcon}`}>
-                                <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
-                                    <FaRegHeart className="text-lg text-white"/>
-                                </ButtonCricle>
+                                {type === 'album' ? (
+                                    <ButtonCricle 
+                                        onClick={() => handleFavoriteAlbum(item, currentUser?._id)}
+                                        className="bg-transparent transition duration-300 hover:bg-white/30"
+                                    >
+                                        {favoriteAlbum?.some(album => album._id === item._id) ? (
+                                            <FaHeart className="text-lg text-[#218888]"/>
+                                        ) : (
+                                            <FaRegHeart className="text-lg text-white"/>
+                                        )}
+                                    </ButtonCricle>
+                                ) : (
+                                    <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
+                                        <FaRegHeart className="text-lg text-white"/>
+                                    </ButtonCricle>
+                                )}
                                 {renderActionButton(item)}
                                 <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
                                     <BsThreeDots className="text-lg text-white"/>

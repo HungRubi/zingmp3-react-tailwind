@@ -24,7 +24,7 @@ const Public = () => {
     return (
         <div className="w-full flex flex-col h-full">
             <div className="w-full flex h-full">
-                <div className="w-[240px] flex-none">
+                <div className={`w-[240px] flex-none ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'}`}>
                     <SidebarLeft/>
                 </div>
                 <div ref={mainContainerRef} className={`bg-[#CED9D9] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} overflow-y-scroll pb-10 relative flex-auto 
@@ -43,7 +43,7 @@ const Public = () => {
                     <SidebarRight/>
                 </div>
             </div>
-            <div className={`flex-none h-[90px] bg-main-300 border-player transition-transform duration-500 ease-in-out ${!currentSongId ? '-translate-y-full' : 'translate-y-0'}`}>
+            <div className={`flex-none h-[90px] bg-main-300 border-player transition-transform duration-500 ease-in-out ${!currentSongId ? 'translate-y-50' : 'translate-y-0'}`}>
                 <Player/>
             </div>
         </div>

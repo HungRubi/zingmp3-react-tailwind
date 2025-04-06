@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Button} from '../components';
 import * as actions from '../store/actions';
-import { toast } from 'react-toastify';
 import icons from '../util/icons';
 const { IoMdClose } = icons;
 import PropTypes from 'prop-types';
@@ -10,7 +9,7 @@ import PropTypes from 'prop-types';
 const Modal = ({className}) => {
     const [isShow, setIsShow] = useState(false)
     const dispatch = useDispatch();
-    const { message, loginError } = useSelector(state => state.app);
+    const { loginError } = useSelector(state => state.app);
 
     const handleClose = () => {
         setIsShow(false)
@@ -37,13 +36,6 @@ const Modal = ({className}) => {
         await dispatch(actions.login(formData));
     }
 
-    useEffect(() => {
-        if(message){
-            toast.success(message);
-            dispatch(actions.resetMessage());
-        }
-    }, [message, dispatch])
-
     return (
         <>
             <Button 
@@ -54,7 +46,7 @@ const Modal = ({className}) => {
                 Đăng nhập
             </Button>
             <div 
-                className={`${isShow ? 'flex' : 'hidden'} overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[#00000086] bg-opacity-25`}
+                className={`${isShow ? 'flex' : 'hidden'} overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-100 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[#00000086] bg-opacity-25`}
                 onClick={handleClose}
             >
                 <div className="relative p-4 w-full max-w-md max-h-full" onClick={e => e.stopPropagation()}>
@@ -106,7 +98,7 @@ const Modal = ({className}) => {
 }
 
 Modal.propTypes = {
-    className: PropTypes.node.isRequired
+    className: PropTypes.string
 }
 
 export default Modal

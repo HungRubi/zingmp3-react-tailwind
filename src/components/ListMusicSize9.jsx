@@ -12,11 +12,7 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId} = useSelector(state => state.music);
     const {currentUser} = useSelector(state => state.user);
-    const {favoriteSong, message} = useSelector(state => state.app);
-    if(message){
-        toast.success(message);
-        dispatch(actions.resetMessage());
-    }
+    const {favoriteSong} = useSelector(state => state.app);
 
     const handlePlay = (item) => {
         if (currentSongId === item._id) {

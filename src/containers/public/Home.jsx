@@ -69,7 +69,7 @@ const Home = () => {
                 data={songNew} 
                 nameList={"mới phát hành"}
                 isReset={"hidden"}/>
-                <ListMusicSlider data={topSong}/>
+                <ListMusicSlider data={topSong} type={"slider"}/>
                 <div className="w-full flex items-center gap-5 mt-10">
                     <div className="w-1/3 relative rounded-lg overflow-hidden group">
                         <img 

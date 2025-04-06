@@ -4,6 +4,7 @@ const initState = {
     currentUser: null,
     favoriteSong: null,
     favoriteAlbum: null,
+    favoriteSinger: null,
 }
 
 const userReducers = (state = initState, action) => {
@@ -13,7 +14,8 @@ const userReducers = (state = initState, action) => {
                 ...state,
                 currentUser: action.user || null,
                 favoriteSong: action.song || null,
-                favoriteAlbum: action.album || null
+                favoriteAlbum: action.album || null,
+                favoriteSinger: action.singer || null,
             }
         
         case actionType.LOGOUT_PERSIST:
@@ -23,6 +25,7 @@ const userReducers = (state = initState, action) => {
                 currentUser: null,
                 favoriteSong: null,
                 favoriteAlbum: null,
+                favoriteSinger: null,
             }
         default:
             return state

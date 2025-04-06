@@ -82,7 +82,7 @@ const SidebarRight = () => {
     }, [currentSongId, otherSongs, unplayedSongs, autoPlay, dispatch]);
 
     return (
-        <div className="bg-[#CED9D9] h-[calc(100vh-90px)] flex flex-col">
+        <div className="bg-[#CED9D9] h-full flex flex-col">
             <div className="flex h-[70px] items-center justify-between px-2 w-full gap-2 flex-none">
                 <div className="flex-1 rounded-[999px] bg-[hsla(0,0%,100%,0.3)] p-[3px] flex">
                     <button onClick={() => setIsPlay("danh sách phát")}
@@ -144,11 +144,11 @@ const SidebarRight = () => {
                         <div className="px-2 flex mt-2.5">
                             <h5 className='font-medium'>Tiếp theo</h5>
                         </div>
-                        <div className="h-[calc(100vh-250px)] overflow-y-auto [&::-webkit-scrollbar]:w-1 
+                        <div className={`${currentSongId ? "h-[calc(100vh-250px)]" : "h-[calc(100vh-50px)]"}  overflow-y-auto [&::-webkit-scrollbar]:w-1 
                                         [&::-webkit-scrollbar-track]:bg-transparent 
                                         [&::-webkit-scrollbar-thumb]:bg-[#0000001a] 
                                         [&::-webkit-scrollbar-thumb]:rounded-full 
-                                        hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]">
+                                        hover:[&::-webkit-scrollbar-thumb]:bg-[#00000033]`}>
                             <div className="w-full">
                                 {otherSongs?.map((item, index) => (
                                     <div key={index} className="w-full flex p-2 items-center group rounded-sm hover:bg-[hsla(0,0%,100%,0.3)]">

@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100, AlbumDetail, SingerDetail} from './containers/public/';
+import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100, AlbumDetail, SingerDetail, Search} from './containers/public/';
 import { Routes, Route } from 'react-router-dom';
 import path from './util/path'
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,18 +8,27 @@ import { useEffect } from 'react';
 import * as actions from './store/actions';
 import {MyMusic} from './containers/system/'
 import MvDetail from './containers/public/MvDetail';
+import { toast } from 'react-toastify';
 
 function App() {
   const dispatch = useDispatch();
-  const { currentUser,favoriteSong,favoriteAlbum,accessToken } = useSelector(state => state.app);
+  const { currentUser, favoriteSong, favoriteAlbum, favoriteSinger } = useSelector(state => state.app);
   useEffect(() => {
     dispatch(actions.getHome());
     if(currentUser && favoriteSong && favoriteAlbum) {
-      dispatch(actions.setCurrentUser(currentUser,favoriteSong,favoriteAlbum));
+      dispatch(actions.setCurrentUser(currentUser, favoriteSong, favoriteAlbum, favoriteSinger));
     }
 
-  }, [dispatch, currentUser, favoriteSong, favoriteAlbum]);
-  console.log('accessToken', accessToken);
+  }, [dispatch, currentUser, favoriteSong, favoriteAlbum, favoriteSinger]);
+  const {message} = useSelector(state => state.app);
+  
+  useEffect(() => {
+      if(message){
+          toast.success(message);
+          dispatch(actions.resetMessage());
+      }
+  }, [message, dispatch]);
+
   return (
     <>
       <Routes>
@@ -33,6 +42,7 @@ function App() {
           <Route path={path.DETAILSINGER} element={<SingerDetail/>}/>
           <Route path={path.DETAILMV} element={<MvDetail/>}/>
           <Route path={path.BXH} element={<BangXepHang/>}/>
+          <Route path={path.SEARCH} element={<Search/>}/>
           <Route path={path.HUB} element={<Hub/>}/>
           <Route path={path.TOP100} element={<Top100/>}/>
           <Route path={path.STAR} element={<Home/>}/>

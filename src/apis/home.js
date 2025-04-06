@@ -11,3 +11,15 @@ export const getHome = async () => {
         console.log(error)
     }
 }
+
+export const querySearch = async () => {
+    try{
+        const response = await axios({
+            url: 'home',
+            method: 'get'
+        })
+        return response
+    }catch(error){
+        console.log(error)
+    }
+}

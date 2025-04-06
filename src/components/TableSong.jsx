@@ -4,22 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
 import { toast } from 'react-toastify';
 import ButtonCircle from "./ButtonCricle";
-import { useEffect } from 'react';
 
 const {PiMusicNotesSimpleBold, FaPlay, FaHeart, FaRegHeart} = icons;
 
 const TableSong = ({classIndex, isIndex, isMusic, isName, isIcon, isHeader, data, className, isAlbum, classSong}) => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId} = useSelector(state => state.music);
-    const {currentUser} = useSelector(state => state.user);
-    const {favoriteSong, message} = useSelector(state => state.app);
-
-    useEffect(() => {
-        if(message){
-            toast.success(message);
-            dispatch(actions.resetMessage());
-        }
-    }, [message, dispatch]);
+    const {currentUser, favoriteSong} = useSelector(state => state.user);
+    
 
     const handlePlay = (item) => {
         if (currentSongId === item._id) {

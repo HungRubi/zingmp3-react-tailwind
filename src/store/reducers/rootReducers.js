@@ -24,6 +24,7 @@ const userConfig = {
         'currentUser',
         'favoriteSong',
         'favoriteAlbum',
+        'favoriteSinger',
     ]
 }
 

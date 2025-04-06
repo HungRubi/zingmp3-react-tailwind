@@ -25,4 +25,8 @@ export const setAutoPlay = (flag) => ({
     flag
 })
 
+export const logoutMusic = () => ({
+    type: actionType.LOGOUT_MUSIC,
+})
+
     

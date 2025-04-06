@@ -29,7 +29,7 @@ const SidebarLeft = () => {
     }, []);
 
     return (
-        <div className='bg-[#DDE4E4] h-[calc(100vh-90px)] flex flex-col'>
+        <div className='bg-[#DDE4E4] h-full flex flex-col'>
             <div className="w-full px-[25px] py-5 flex justify-start items-center">
                 <img src={logo} alt="logo" className='w-[120px] h-10'/>
             </div>

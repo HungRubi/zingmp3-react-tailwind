@@ -1,10 +1,11 @@
 import actionType from "./actionTypes";
 
-export const setCurrentUser = (user,song, album) => ({
+export const setCurrentUser = (user, song, album, singer) => ({
     type: actionType.SET_CURRENT_USER,
     user,
     song,
-    album
+    album,
+    singer
 })
 
 export const logoutPersist = () => ({

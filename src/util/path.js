@@ -12,6 +12,7 @@ const path = {
     DETAILALBUM: 'album/:slug',
     DETAILSINGER: 'singer/:slug', 
     DETAILMV: 'mv/:slug', 
+    SEARCH: 'search',
 }
 
 export default path

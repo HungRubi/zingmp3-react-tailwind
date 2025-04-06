@@ -37,6 +37,7 @@ const initState = {
     top100NoiBat: [],
     accessToken: null,
     allSongs: [],
+    favoriteSinger: []
 }
 
 const appReducer = (state = initState, action) => {
@@ -65,6 +66,7 @@ const appReducer = (state = initState, action) => {
                 message: action.payload?.message || null,
                 favoriteSong: action.payload?.favoriteSongs || null,
                 favoriteAlbum: action.payload?.favoriteAlbums || null,
+                favoriteSinger: action.payload?.favoriteSingers || null,
                 accessToken: action.payload?.accessToken || null,
                 loginError: null
             }
@@ -151,6 +153,34 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 message: action.payload?.message || null,
                 favoriteSong: action.payload?.favoriteSongs || null,
+            }
+
+        case actionType.UPDATE_FAVORITE_ALBUM:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteAlbum: action.payload?.favoriteAlbums || null,
+            }
+
+        case actionType.DELETE_FAVORITE_ALBUM:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteAlbum: action.payload?.favoriteAlbums || null,
+            }
+
+        case actionType.UPDATE_FAVORITE_SINGER:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteSinger: action.payload?.favoriteSingers || null,
+            }
+    
+        case actionType.DELETE_FAVORITE_SINGER:
+            return {
+                ...state,
+                message: action.payload?.message || null,
+                favoriteSinger: action.payload?.favoriteSingers || null,
             }
         default:
             return state

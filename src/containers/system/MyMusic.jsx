@@ -3,7 +3,7 @@ import {ListSingerFollower, ListMusic} from '../../components';
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 import { MySong } from '../system';
 const MyMusic = () => {
-    const {favoriteAlbum} = useSelector(state => state.user);
+    const {favoriteAlbum, favoriteSinger} = useSelector(state => state.user);
     const formatAlbum = favoriteAlbum?.slice(0, 5);
     const tabs = [
         {
@@ -23,12 +23,17 @@ const MyMusic = () => {
     const notActive = "uppercase font-medium text-gray-600 border-b-2 border-transparent py-3";
     return (
         <div className="mt-8 px-[59px] w-full">
-            <ListSingerFollower/>
+            <ListSingerFollower 
+                data={favoriteSinger?.slice(0,5)}
+                isButton={"hidden"}
+            />
             <ListMusic 
                 isFan={"hidden"}
                 classCard={"!w-1/5"}
                 nameList={"PLAYLIST"}
+                type={"album"}
                 data={formatAlbum}
+                isSinger={"hidden"}
             />
             <div className="mt-10 w-full flex items-center gap-10 border-b border-[#0000002c]">
                 {tabs.map(item => (

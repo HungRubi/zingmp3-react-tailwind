@@ -43,6 +43,16 @@ const musicReducers = (state = initState, action) => {
                 recentSongs: [action.song, ...state.recentSongs].slice(0, 15) // Giới hạn 15 bài
             };
         }
+
+        case actionType.LOGOUT_MUSIC:
+            return {
+                ...state,
+                currentSongId: null,
+                currentSong: null,
+                isPlaying: false,
+                autoPlay: true,
+                recentSongs: []
+            }
         default:
             return state
     }
