@@ -8,7 +8,7 @@ import ButtonCircle from "./ButtonCricle";
 
 const {RiResetRightFill,FaPlay, FaHeart, FaRegHeart, BsThreeDots,MdOutlineArrowForwardIos} = icons
 
-const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
+const ListMusicSize9 = ({nameList, isReset, isAll,data}) => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId} = useSelector(state => state.music);
     const {currentUser} = useSelector(state => state.user);
@@ -54,17 +54,7 @@ const ListMusicSize9 = ({nameList, isReset, isAll, isTab,data}) => {
                     <MdOutlineArrowForwardIos/>
                 </div>
             </div>
-            <div className={`w-full flex items-center gap-3 mt-5 ${isTab}`}>
-                <Button className={"!py-[2px] uppercase text-[12px] !font-[600] text-white !bg-[#218888]"}>
-                    tất cả
-                </Button>
-                <Button className={"!py-[1.5px] uppercase text-[12px] !font-[600] text-gray-500 !bg-transparent border border-gray-400 transition duration-300 hover:!bg-[#218888] hover:!text-white"}>
-                    việt nam
-                </Button>
-                <Button className={"!py-[1.5px] uppercase text-[12px] !font-[600] text-gray-500 !bg-transparent border border-gray-400 transition duration-300 hover:!bg-[#218888] hover:!text-white"}>
-                    quốc tế
-                </Button>
-            </div>
+            
             <div className="w-full flex mt-5">
                 <div className="w-full flex gap-5 flex-wrap">
                     {data?.map(item => (
@@ -127,7 +117,6 @@ ListMusicSize9.propTypes = {
     nameList: PropTypes.node.isRequired,
     isReset: PropTypes.node.isRequired,
     isAll: PropTypes.node.isRequired,
-    isTab: PropTypes.node.isRequired,
     data: PropTypes.array.isRequired,
 }
 

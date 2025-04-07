@@ -23,3 +23,26 @@ export const getHome = () => async (dispatch) => {
         })
     }
 }
+
+export const querySearch = (query) => async (dispatch) => {
+    try{
+        const response = await apis.querySearch(query);
+        if(response.status === 200) {
+            dispatch({
+                type: actionType.SEARCH,
+                payload: response.data
+            })
+        }else{
+            dispatch({
+                type: actionType.SEARCH,
+                payload: null
+            })
+        }
+    }catch(error){
+        dispatch({
+            type: actionType.SEARCH,
+            payload: null,
+            error
+        })
+    }
+}

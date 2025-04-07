@@ -9,7 +9,8 @@ const { FaRegHeart, FaHeart, BsThreeDots, MdOutlineArrowForwardIos, FaPlay } = i
 
 const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, classIcon, isAbum, isFan, dataSinger, data, type, classWrapper}) => {
     const dispatch = useDispatch();
-    const {currentUser, favoriteAlbum} = useSelector(state => state.user);
+    const {currentUser, favoriteAlbum, favoriteSong} = useSelector(state => state.user);
+    const { currentSongId, isPlaying } = useSelector(state => state.music);
     
     const handleFavoriteAlbum = async (item, user) => {
         try {
@@ -24,11 +25,16 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
         }
     }
 
+    const handlePlaySong = (song) => {
+        dispatch(actions.setCurrentSongId(song._id));
+        dispatch(actions.play(true));
+    }
+
     const renderActionButton = (item) => {
         if (type === 'album') {
             return (
                 <NavLink to={`/album/${item.slug}`}>
-                    <ButtonPlay className="text-white !h-11 !w-11">
+                    <ButtonPlay className="text-white !h-11 !w-11 flex-none">
                         <FaPlay className={`text-lg ml-1`} />
                     </ButtonPlay>
                 </NavLink>
@@ -36,15 +42,23 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
         } else if (type === 'mv') {
             return (
                 <NavLink to={`/mv/${item.slug}`}>
-                    <ButtonPlay className="text-white !h-11 !w-11">
+                    <ButtonPlay className="text-white !h-11 !w-11 flex-none">
                         <FaPlay className={`text-lg ml-1`} />
                     </ButtonPlay>
                 </NavLink>
             )
         } else {
             return (
-                <ButtonPlay onClick={() => dispatch(actions.play(true))} className="text-white !h-11 !w-11">
-                    <FaPlay className={`text-lg ml-1`} />
+                <ButtonPlay 
+                    onClick={() => handlePlaySong(item)} 
+                    className={`text-white !h-11 !w-11 flex-none`}
+                >
+                    {currentSongId === item._id ? (
+                        <img src="/animation/icon-playing.gif" alt="pause" className="w-5 h-5" />
+                    ) : (
+                        <FaPlay className={`text-lg ml-1`} />
+                    )}
+                    
                 </ButtonPlay>
             )
         }
@@ -79,7 +93,7 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
             </div>
             <div className={`w-full flex items-center flex-nowrap gap-5 mt-5 ${classListCard}`}>
                 {data?.map(item => (
-                    <div key={item._id} className={`w-1/7 flex flex-col gap-2.5 ${classCard}`}>
+                    <div key={item._id} className={`w-1/7 flex flex-col gap-2.5 ${classCard} ${currentSongId === item._id ? 'text-[#218888]' : ''}`}>
                         <div className="w-full relative rounded-lg overflow-hidden group">
                             <img 
                                 src={item.img} 
@@ -87,17 +101,25 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                                 className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
                             />
                             <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
-                            items-center justify-center gap-3 flex transform scale-0 transition-transform 
-                            duration-500 ease-in-out group-hover:scale-100 ${classIcon}`}>
+                            items-center justify-center gap-3 flex transform transition-transform 
+                            duration-500 ease-in-out ${classIcon} ${currentSongId === item._id && isPlaying ? 'scale-100' : 'scale-0 group-hover:scale-100'}`}>
                                 {type === 'album' ? (
                                     <ButtonCricle 
                                         onClick={() => handleFavoriteAlbum(item, currentUser?._id)}
                                         className="bg-transparent transition duration-300 hover:bg-white/30"
                                     >
-                                        {favoriteAlbum?.some(album => album._id === item._id) ? (
-                                            <FaHeart className="text-lg text-[#218888]"/>
+                                        {type === 'album' || type === 'mv' ? (
+                                            favoriteAlbum?.some(album => album._id === item._id) ? (
+                                                <FaHeart className="text-lg text-[#218888]"/>
+                                            ) : (
+                                                <FaRegHeart className="text-lg text-white"/>
+                                            )
                                         ) : (
-                                            <FaRegHeart className="text-lg text-white"/>
+                                            favoriteSong?.some(song => song._id === item._id) ? (
+                                                <FaHeart className="text-lg text-[#218888]"/>
+                                            ) : (
+                                                <FaRegHeart className="text-lg text-white"/>
+                                            )
                                         )}
                                     </ButtonCricle>
                                 ) : (
@@ -126,7 +148,6 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                 ))}
             </div>
         </div>
-        
     )
 }
 

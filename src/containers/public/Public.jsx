@@ -7,6 +7,7 @@ const Public = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const mainContainerRef = useRef(null)
     const { currentSongId } = useSelector(state => state.music)
+    const { isTabMusic } = useSelector(state => state.user)
 
     useEffect(() => {
         const mainContainer = mainContainerRef.current
@@ -27,7 +28,9 @@ const Public = () => {
                 <div className={`w-[240px] flex-none ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'}`}>
                     <SidebarLeft/>
                 </div>
-                <div ref={mainContainerRef} className={`bg-[#CED9D9] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} overflow-y-scroll pb-10 relative flex-auto 
+                
+                <div ref={mainContainerRef} 
+                className={`bg-[#CED9D9] ${isTabMusic ? "w-full" : "w-[calc(100%-569px)]"} ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} overflow-y-scroll pb-10 relative transition-all duration-800 ease-in-out
                     [&::-webkit-scrollbar]:w-1 
                     [&::-webkit-scrollbar-track]:bg-transparent 
                     [&::-webkit-scrollbar-thumb]:bg-[#0000001a] 
@@ -39,7 +42,7 @@ const Public = () => {
                     </div>
                     <Outlet />
                 </div>
-                <div className={`w-[329px] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} flex-none box-shadow-left border-l border-[rgba(0,0,0,0.25)]`}>
+                <div className={`${isTabMusic ? "absolute right-0 translate-x-full opacity-0" : "relative translate-x-0 opacity-100"} w-[329px] ${currentSongId ? 'h-[calc(100vh-90px)]' : 'h-[100vh]'} flex-none box-shadow-left transition-all duration-800 ease-in-out`}>
                     <SidebarRight/>
                 </div>
             </div>

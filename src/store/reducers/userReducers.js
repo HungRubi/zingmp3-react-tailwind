@@ -5,6 +5,7 @@ const initState = {
     favoriteSong: null,
     favoriteAlbum: null,
     favoriteSinger: null,
+    isTabMusic: false,
 }
 
 const userReducers = (state = initState, action) => {
@@ -26,6 +27,12 @@ const userReducers = (state = initState, action) => {
                 favoriteSong: null,
                 favoriteAlbum: null,
                 favoriteSinger: null,
+            }
+
+        case actionType.TAB_MUSIC:
+            return {
+                ...state,
+                isTabMusic: action.flag
             }
         default:
             return state

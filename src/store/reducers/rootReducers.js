@@ -25,6 +25,7 @@ const userConfig = {
         'favoriteSong',
         'favoriteAlbum',
         'favoriteSinger',
+        'isTabMusic',
     ]
 }
 

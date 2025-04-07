@@ -12,10 +12,10 @@ export const getHome = async () => {
     }
 }
 
-export const querySearch = async () => {
+export const querySearch = async (query) => {
     try{
         const response = await axios({
-            url: 'home',
+            url: `search?s=${query}`,
             method: 'get'
         })
         return response

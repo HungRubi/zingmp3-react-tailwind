@@ -37,7 +37,13 @@ const initState = {
     top100NoiBat: [],
     accessToken: null,
     allSongs: [],
-    favoriteSinger: []
+    favoriteSinger: [],
+    singerSearch: {},
+    songsSearch: [],
+    albumsSearch: [],
+    mvsSearch: [],
+    songVn: [],
+    songQuocTe: [],
 }
 
 const appReducer = (state = initState, action) => {
@@ -57,8 +63,20 @@ const appReducer = (state = initState, action) => {
                 radio: action.payload?.radio,
                 albumChill: action.payload?.albumChill,
                 topSong: action.payload?.topSong,
+                songVn: action.payload?.songVn,
+                songQuocTe: action.payload?.songQuocte,
             }
-
+        
+        case actionType.SEARCH:
+            return {
+                ...state,
+                singerSearch: action.payload?.singers,
+                songsSearch: action.payload?.songs,
+                albumsSearch: action.payload?.albums,
+                mvsSearch: action.payload?.mv,
+                singerSuggest: action.payload?.singerSuggest,
+            }
+        
         case actionType.LOGIN:
             return {
                 ...state,
@@ -182,6 +200,8 @@ const appReducer = (state = initState, action) => {
                 message: action.payload?.message || null,
                 favoriteSinger: action.payload?.favoriteSingers || null,
             }
+
+        
         default:
             return state
     }

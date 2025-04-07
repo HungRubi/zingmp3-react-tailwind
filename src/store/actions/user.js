@@ -11,5 +11,9 @@ export const setCurrentUser = (user, song, album, singer) => ({
 export const logoutPersist = () => ({
     type: actionType.LOGOUT_PERSIST,
     message: "Logout successfully",
-}) 
+})
+export const isTabMusic = (flag) => ({
+    type: actionType.TAB_MUSIC,
+    flag
+})  
     

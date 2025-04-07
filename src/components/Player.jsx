@@ -12,6 +12,7 @@ const Player = () => {
     const dispatch = useDispatch();
     const {isPlaying, currentSongId, autoPlay, recentSongs, isShuffle, isRepeat} = useSelector(state => state.music);
     const {allSongs} = useSelector(state => state.app);
+    const {isTabMusic} = useSelector(state => state.user);
     const audioRef = useRef();
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -199,6 +200,9 @@ const Player = () => {
         }
     }, [currentSongId, recentSongs, allSongs, autoPlay, isShuffle, isRepeat, dispatch]);
 
+    const hanleTabMusic = () => {
+        dispatch(actions.isTabMusic(!isTabMusic));
+    }
     return (
         <div className={`w-full h-full px-5 flex transition-transform duration-500 ease-in-out ${!currentSongId ? 'translate-y-50' : 'translate-y-0'}`}>
             <audio 
@@ -304,8 +308,9 @@ const Player = () => {
                     </div>
                 </div>
                 <div className="h-8 border border-[rgba(0,0,0,0.05)]"></div>
-                <button className='h-8 flex items-center justify-center w-8 rounded-sm bg-[#0E8080] cursor-pointer'>
-                    <PiPlaylistBold className='text-white text-lg'/>
+                <button onClick={hanleTabMusic} title='danh sách phát'
+                className={`h-8 flex items-center justify-center w-8 rounded-sm bg-[#0E8080] cursor-pointer ${isTabMusic ?  'bg-[hsla(0,0%,100%,.1)] !text-gray-500' : 'bg-[#218888] text-white'} `}>
+                    <PiPlaylistBold className='text-lg'/>
                 </button>
             </div>
         </div>

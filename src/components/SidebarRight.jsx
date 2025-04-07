@@ -189,7 +189,7 @@ const SidebarRight = () => {
                                     />
                                 ) : (
                                     <ToggleOff 
-                                        className='mr-2 text-gray-400 text-3xl cursor-pointer'
+                                        className=' text-gray-400 text-3xl cursor-pointer'
                                         onClick={handleAutoPlay}
                                     />
                                 )}

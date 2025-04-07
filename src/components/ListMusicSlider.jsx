@@ -6,10 +6,9 @@ import { NavLink } from 'react-router-dom';
 
 const {FaPlay} = icons;
 
-const ListMusicSlider = ({data, nameList, type}) => {
+const ListMusicSlider = ({data, nameList, type, dataSinger, dataSong}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-    
     const part1 = data?.slice(0, 3);
     const part2 = data?.slice(3, 6);
     const part3 = data?.slice(6, 8);
@@ -54,7 +53,9 @@ const ListMusicSlider = ({data, nameList, type}) => {
                                        <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
                                        items-center justify-center gap-3 flex transform scale-0 transition-transform 
                                        duration-500 ease-in-out group-hover:scale-100`}>
-                                           <ButtonPlay className="text-white !h-11 !w-11"/>
+                                           <ButtonPlay className="text-white !h-11 !w-11">
+                                                  <FaPlay className='text-lg ml-1 text-white'/>
+                                           </ButtonPlay>
                                        </div>
                                    </div>
                                    <div className="flex flex-1 flex-col justify-between">
@@ -91,14 +92,14 @@ const ListMusicSlider = ({data, nameList, type}) => {
                             <div className="w-1/3 p-2.5 bg-white/30 rounded-sm flex gap-5 items-center">
                                 <div className="relative rounded-[50%] overflow-hidden group w-25 h-25 flex-none">
                                     <img 
-                                        src="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg"
-                                        alt=""
+                                        src={dataSinger[0]?.img}
+                                        alt={dataSinger[0]?.name}
                                         className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
                                     />
                                     <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
                                     items-center justify-center gap-3 flex transform scale-0 transition-transform 
                                     duration-500 ease-in-out group-hover:scale-100 rounded-[50%]`}>
-                                        <NavLink to={`/singer/:slug`}>
+                                        <NavLink to={`/singer/${dataSinger[0]?.slug}`} className="flex items-center justify-center">
                                             <FaPlay className='text-lg ml-1 text-white'/>
                                         </NavLink>
                                     </div>
@@ -109,7 +110,7 @@ const ListMusicSlider = ({data, nameList, type}) => {
                                             nghệ sĩ
                                         </h6>
                                         <h5 className='font-medium text-base text-gray-800 mt-1.5 line-clamp-1'>
-                                            Sơn tùng M-TP
+                                            {dataSinger[0]?.stagename}
                                         </h5>
                                         <h6 className='text-[12px] text-gray-500 font-[500] capitalize mt-1'>
                                             2.5M quan tâm
@@ -117,33 +118,35 @@ const ListMusicSlider = ({data, nameList, type}) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-1/3 p-2.5 bg-white/30 rounded-sm flex gap-5 items-center">
-                                <div className="relative rounded-lg overflow-hidden group w-25 h-25 flex-none">
-                                    <img 
-                                        src="https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_jpeg/cover/5/f/b/c/5fbcebb0cb33b8cf404f2fd4e30305f9.jpg"
-                                        alt=""
-                                        className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
-                                    />
-                                    <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
-                                    items-center justify-center gap-3 flex transform scale-0 transition-transform 
-                                    duration-500 ease-in-out group-hover:scale-100 rounded-lg`}>
-                                        <FaPlay className='text-lg ml-1 text-white'/>
+                            {dataSong?.map((item) => (
+                                <div className="w-1/3 p-2.5 bg-white/30 rounded-sm flex gap-5 items-center" key={item._id}>
+                                    <div className="relative rounded-lg overflow-hidden group w-25 h-25 flex-none">
+                                        <img 
+                                            src={item.img}
+                                            alt={item.name}
+                                            className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
+                                        />
+                                        <div className={`top-0 bottom-0 left-0 right-0 absolute bg-hover-music 
+                                        items-center justify-center gap-3 flex transform scale-0 transition-transform 
+                                        duration-500 ease-in-out group-hover:scale-100 rounded-lg`}>
+                                            <FaPlay className='text-lg ml-1 text-white'/>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-1 flex-col justify-between">
+                                        <div className="text-sm capitalize">
+                                            <h6 className='text-[12px] text-gray-500 font-[500] capitalize'>
+                                                bài hát
+                                            </h6>
+                                            <h5 className='font-medium text-base text-gray-800 mt-1.5 line-clamp-2'>
+                                                {item.name}
+                                            </h5>
+                                            <h6 className='text-[12px] text-gray-500 font-[500] capitalize mt-1'>
+                                                {item.singer}
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex flex-1 flex-col justify-between">
-                                    <div className="text-sm capitalize">
-                                        <h6 className='text-[12px] text-gray-500 font-[500] capitalize'>
-                                            bài hát
-                                        </h6>
-                                        <h5 className='font-medium text-base text-gray-800 mt-1.5 line-clamp-2'>
-                                            Hãy trao cho anh
-                                        </h5>
-                                        <h6 className='text-[12px] text-gray-500 font-[500] capitalize mt-1'>
-                                            sơn tùng M-TP
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 )}
@@ -153,6 +156,8 @@ const ListMusicSlider = ({data, nameList, type}) => {
 }
 
 ListMusicSlider.propTypes = {
+    dataSong: PropTypes.array,
+    dataSinger: PropTypes.array,
     data: PropTypes.array,
     nameList: PropTypes.string,
     type: PropTypes.string,
