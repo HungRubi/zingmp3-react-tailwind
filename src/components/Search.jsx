@@ -55,7 +55,7 @@ const Search = () => {
                 value={value}
                 name="s" 
                 placeholder='Tìm kiếm bài hát, nghệ sĩ, album...'
-                className='w-full border-none bg-none outline-none'
+                className='w-full border-none bg-none outline-none hide-1557'
             />
         </form>
     )

@@ -1,6 +1,7 @@
-const Download = () => {
+import PropTypes from "prop-types"
+const Download = ({className}) => {
     return (
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={className}>
             <path 
                 d="M17.4966 13.4203V13.6633C17.4966 14.5857 16.7489 15.3333 15.8266 15.3333H4.16658C3.24427 15.3333 2.49658 14.5857 2.49658 13.6633V5.00334C2.49658 4.08103 3.24427 3.33334 4.16658 3.33334H9.99658" stroke="currentColor" strokeLinecap="round">
             </path>
@@ -12,6 +13,10 @@ const Download = () => {
             </path>
         </svg>
     )
+}
+
+Download.propTypes = {
+    className: PropTypes.string
 }
 
 export default Download

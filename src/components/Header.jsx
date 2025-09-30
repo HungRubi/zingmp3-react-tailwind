@@ -52,7 +52,7 @@ const Header = () => {
     return(
         <div className="flex items-center justify-between w-full h-full">
             <div className="flex items-center gap-8">
-                <div className="flex items-center">
+                <div className="flex items-center hide-1294">
                     <span className='text-[24px] mr-5 cursor-pointer opacity-40'>
                         <GoArrowLeft/>
                     </span>
@@ -60,17 +60,17 @@ const Header = () => {
                         <GoArrowRight/>
                     </span>
                 </div>
-                <div className="w-[440px]">
+                <div className="w-[440px] w-auto-1557 search-1708">
                     <Search/>
                 </div>
             </div>
             <div className="flex items-center justify-between gap-2.5">
-                <Button className="!bg-[#218888] !text-white">
+                <Button className="!bg-[#218888] !text-white line-clamp-1 hide-1195">
                     Nâng cấp tài khoản
                 </Button>
-                <Button>
-                    <Download/>
-                    <span className='ml-1.5'>Tải bản Windows</span>
+                <Button className="hide-1195">
+                    <Download className="hide-1708"/>
+                    <span className='line-clamp-1'>Tải bản Windows</span>
                 </Button>
                 <div ref={settingRef}>
                     <ButtonCricle 
