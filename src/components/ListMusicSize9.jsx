@@ -5,6 +5,7 @@ import icons from '../util/icons';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import ButtonCircle from "./ButtonCricle";
+import { useEffect, useState } from 'react';
 
 const {RiResetRightFill,FaPlay, FaHeart, FaRegHeart, BsThreeDots,MdOutlineArrowForwardIos} = icons
 
@@ -13,7 +14,7 @@ const ListMusicSize9 = ({nameList, isReset, isAll,data}) => {
     const {isPlaying, currentSongId} = useSelector(state => state.music);
     const {currentUser} = useSelector(state => state.user);
     const {favoriteSong} = useSelector(state => state.app);
-
+    
     const handlePlay = (item) => {
         if (currentSongId === item._id) {
             dispatch(actions.play(!isPlaying));
@@ -23,7 +24,6 @@ const ListMusicSize9 = ({nameList, isReset, isAll,data}) => {
             dispatch(actions.addRecentSong(item));
         }
     }
-
     const handleFavorite = async (item, user) => {
         try {
             const isFavorite = favoriteSong?.some(song => song._id === item._id);
@@ -36,20 +36,41 @@ const ListMusicSize9 = ({nameList, isReset, isAll,data}) => {
             toast.error(error);
         }
     }
+    const [width, setWidth] = useState(window.innerWidth);
+    const [limitData, setLimitData] = useState(9);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(document.documentElement.clientWidth); // luôn update width mới nhất
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // cleanup khi component unmount
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    useEffect(() => {
+        if (width < 755) {
+        setLimitData(4);
+        } else if (width < 1130) {
+        setLimitData(8);
+        } else {
+        setLimitData(9);
+        }
+    }, [width]);
     return (
-        <div className="w-full mt-10">
+        <div className="w-full mt-10 max-[550px]:mt-7">
             <div className="w-full flex justify-between">
-                <h2 className='capitalize text-2xl font-medium'>
+                <h2 className='capitalize text-2xl font-medium max-[634px]:text-lg'>
                     {nameList}
                 </h2>
                 <div className={`flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500] ${isReset}`}>
-                    <Button className={"!bg-[#218888] uppercase gap-2 text-white !py-1"}>
+                    <Button className={"!bg-[#218888] uppercase gap-2 text-white !py-1 max-[634px]:text-[10px]"}>
                         <RiResetRightFill />
                         làm mới
                     </Button>
                 </div>
-                <div className={`flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500] ${isAll}`}>
+                <div className={`flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500] ${isAll} max-[600px]:hidden`}>
                     <h5 className='uppercase'>tất cả</h5>
                     <MdOutlineArrowForwardIos/>
                 </div>
@@ -57,9 +78,11 @@ const ListMusicSize9 = ({nameList, isReset, isAll,data}) => {
             
             <div className="w-full flex mt-5">
                 <div className="w-full flex gap-5 flex-wrap">
-                    {data?.map(item => (
+                    {data?.slice(0, limitData).map(item => (
                         <div key={item._id}
-                        className={`w-[calc(100%/3-14px)] p-2.5 rounded-[5px] flex text-left gap-2.5 items-center group hover:bg-[hsla(0,0%,100%,0.3)] ${currentSongId === item._id && isPlaying ? 'bg-[hsla(0,0%,100%,0.3)]' : ''}`}>
+                        className={`w-[calc(100%/3-14px)] p-2.5 rounded-[5px] flex text-left gap-2.5 items-center 
+                        group hover:bg-[hsla(0,0%,100%,0.3)] max-[1130px]:!w-[calc(100%/2-14px)] max-[755px]:!w-full
+                        ${currentSongId === item._id && isPlaying ? 'bg-[hsla(0,0%,100%,0.3)]' : ''}`}>
                             <div className="h-15 w-15 relative overflow-hidden rounded-lg flex-none">
                                 <img 
                                     src={item.img}

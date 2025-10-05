@@ -39,8 +39,12 @@ import { IoMdClose } from "react-icons/io";
 import { BsPersonPlus } from "react-icons/bs";
 import { IoCheckmark } from "react-icons/io5";
 import { BsVolumeMute } from "react-icons/bs";
+import { FaChevronRight } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 
 const icons = {
+    FaChevronLeft,
+    FaChevronRight,
     BsVolumeMute,
     BsFillPauseFill,
     IoPauseOutline,

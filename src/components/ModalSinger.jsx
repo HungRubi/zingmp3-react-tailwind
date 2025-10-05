@@ -28,7 +28,7 @@ const Modal = ({className, data}) => {
                 onClick={handleClose}
             >
                 <div className="relative p-4  max-w-md max-h-full" onClick={e => e.stopPropagation()}>
-                    <div className="relative w-[480px] bg-[#e0ebeb] rounded-t-lg py-5 px-[30px] flex items-center justify-center flex-col">
+                    <div className="relative w-[480px] bg-[#e0ebeb] rounded-t-lg py-5 px-[30px] flex items-center justify-center flex-col max-[481px]:w-[350px]">
                         <IoMdClose 
                             className='absolute top-4 right-3 text-lg text-gray-600 cursor-pointer z-90'
                             onClick={handleClose}
@@ -42,7 +42,7 @@ const Modal = ({className, data}) => {
                             </h4>
                         </div>
                     </div>
-                    <div className="w-[480px] p-6 bg-[#e0ebeb] rounded-b-lg">
+                    <div className="w-[480px] p-6 bg-[#e0ebeb] rounded-b-lg max-[481px]:w-[350px]">
                         <div className="leading-7 text-gray-600 max-h-[218px] 
                             overflow-y-auto text-sm whitespace-pre-line
                             [&::-webkit-scrollbar]:w-1 

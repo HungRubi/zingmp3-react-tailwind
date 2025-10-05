@@ -12,7 +12,7 @@ const MySong = () => {
     }
     const { favoriteSong } = useSelector(state => state.user);
     return (
-        <div className="w-full mt-8">
+        <div className="w-full mt-5 max-[700px]:!mt-0">
             <div className="flex items-center gap-5">
                 <Button 
                     className={activeButton === 'favorite' ? active : normal}
@@ -31,7 +31,7 @@ const MySong = () => {
                 (<TableSong isIndex={"hidden"} data={favoriteSong}/>) : 
                 (
                 <div className="w-full">
-                    <div className="w-full p-[15px] bg-[hsla(0,0%,100%,0.3)] mt-5 flex items-center">
+                    <div className="w-full p-[15px] bg-[hsla(0,0%,100%,0.3)] mt-5 flex items-center ">
                         <div className="w-1/2">
                             <h5 className='text-sm line-clamp-1'>
                                 Đã tải lên: 1/200

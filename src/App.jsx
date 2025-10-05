@@ -4,7 +4,7 @@ import {Home, Public, Login, Zingchart, Radio, BangXepHang, Hub, Top100, AlbumDe
 import { Routes, Route } from 'react-router-dom';
 import path from './util/path'
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as actions from './store/actions';
 import {MyMusic} from './containers/system/'
 import MvDetail from './containers/public/MvDetail';
@@ -29,6 +29,7 @@ function App() {
       }
   }, [message, dispatch]);
 
+  
   return (
     <>
       <Routes>

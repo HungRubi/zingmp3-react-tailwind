@@ -44,7 +44,8 @@ const Search = () => {
     }
 
     return (
-        <form className="w-full gap-2.5 bg-[hsla(0,0%,100%,0.3)] relative px-2.5 h-10 flex items-center rounded-[20px]"
+        <form className="w-full gap-2.5 bg-[hsla(0,0%,100%,0.3)] relative 
+        px-2.5 h-10 flex items-center rounded-[20px]"
         onSubmit={handleSubmit}>
             <button type='submit' disabled={isLoading}>
                 <GoSearch className={`text-[20px] opacity-60 ${isLoading ? 'animate-spin' : ''}`}/>
@@ -55,7 +56,7 @@ const Search = () => {
                 value={value}
                 name="s" 
                 placeholder='Tìm kiếm bài hát, nghệ sĩ, album...'
-                className='w-full border-none bg-none outline-none hide-1557'
+                className='w-full border-none bg-none outline-none max-[1200px]:hidden max-[634px]:text-sm max-[634px]:block'
             />
         </form>
     )

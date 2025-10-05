@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/actions';
 import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react';
 const { FaRegHeart, FaHeart, BsThreeDots, MdOutlineArrowForwardIos, FaPlay } = icons
 
 const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, classIcon, isAbum, isFan, dataSinger, data, type, classWrapper}) => {
@@ -63,14 +64,40 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
             )
         }
     }
+    const [width, setWidth] = useState(window.innerWidth);
+    const [limitData, setLimitData] = useState(9);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(document.documentElement.clientWidth); // luôn update width mới nhất
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // cleanup khi component unmount
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    useEffect(() => {
+        if(width < 500) {
+            setLimitData(2);
+        }else if (width < 650) {
+            setLimitData(3);
+        }else if (width < 800) {
+            setLimitData(4);
+        }else if (width < 1000) {
+            setLimitData(5);
+        }else {
+            setLimitData(10);
+        }
+    }, [width]);
     return (
-        <div className={`w-full mt-10 ${classWrapper}`}>
+        <div className={`w-full mt-10 ${classWrapper} max-[550px]:mt-5`}>
             <div className="w-full flex justify-between">
                 <div className={`w-full flex justify-between ${isAbum}`}>
-                    <h2 className='capitalize text-2xl font-medium '>
+                    <h2 className='capitalize text-2xl font-medium max-[634px]:text-lg'>
                         {nameList || "nghe gần đây"}
                     </h2>
-                    <div className="flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500]">
+                    <div className="flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500] max-[550px]:text-[12px]">
                         <h5 className='uppercase'>tất cả</h5>
                         <MdOutlineArrowForwardIos/>
                     </div>
@@ -91,9 +118,11 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                     </div>
                 </div>
             </div>
-            <div className={`w-full flex items-center flex-nowrap gap-5 mt-5 ${classListCard}`}>
-                {data?.map(item => (
-                    <div key={item._id} className={`w-1/7 flex flex-col gap-2.5 ${classCard} ${currentSongId === item._id ? 'text-[#218888]' : ''}`}>
+            <div className={`w-full flex items-center flex-nowrap gap-5 mt-5 ${classListCard} max-[550px]:mt-2`}>
+                {data?.slice(0, limitData).map(item => (
+                    <div key={item._id} className={`w-1/7 flex flex-col gap-2.5 
+                    ${classCard} ${currentSongId === item._id ? 'text-[#218888]' : ''}
+                    max-[500px]:w-1/2 max-[650px]:w-1/3 max-[800px]:w-1/4 max-[1000px]:w-1/5`}>
                         <div className="w-full relative rounded-lg overflow-hidden group">
                             <img 
                                 src={item.img} 
@@ -110,36 +139,40 @@ const ListMusic = ({isSinger, classCard, classListCard, classSub, nameList, clas
                                     >
                                         {type === 'album' || type === 'mv' ? (
                                             favoriteAlbum?.some(album => album._id === item._id) ? (
-                                                <FaHeart className="text-lg text-[#218888]"/>
+                                                <FaHeart className="text-lg text-[#218888] max-[550px]:text-[12px]"/>
                                             ) : (
-                                                <FaRegHeart className="text-lg text-white"/>
+                                                <FaRegHeart className="text-lg text-white max-[550px]:text-[12px]"/>
                                             )
                                         ) : (
                                             favoriteSong?.some(song => song._id === item._id) ? (
-                                                <FaHeart className="text-lg text-[#218888]"/>
+                                                <FaHeart className="text-lg text-[#218888] max-[550px]:text-[12px]"/>
                                             ) : (
-                                                <FaRegHeart className="text-lg text-white"/>
+                                                <FaRegHeart className="text-lg text-white max-[550px]:text-[12px]"/>
                                             )
                                         )}
                                     </ButtonCricle>
                                 ) : (
                                     <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
-                                        <FaRegHeart className="text-lg text-white"/>
+                                        <FaRegHeart className="text-lg text-white max-[550px]:text-[12px]"/>
                                     </ButtonCricle>
                                 )}
                                 {renderActionButton(item)}
-                                <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30">
-                                    <BsThreeDots className="text-lg text-white"/>
+                                <ButtonCricle className="bg-transparent transition duration-300 hover:bg-white/30 ">
+                                    <BsThreeDots className="text-lg text-white max-[550px]:text-[12px]"/>
                                 </ButtonCricle>
                             </div>
                         </div>
                         <div className="w-full flex items-center">
-                            <img src={dataSinger?.img} alt="" className={`w-10 h-10 rounded-[50%] mr-2.5 ${isSinger}`}/>
+                            <img 
+                                src={dataSinger?.img} 
+                                alt="" 
+                                className={`w-10 h-10 rounded-[50%] mr-2.5 ${isSinger} max-[700px]:h-8 max-[700px]:w-8 max-[400px]:hidden`}
+                            />
                             <div className={`${classSub}`}>
-                                <h5 className='line-clamp-1 font-medium capitalize'>
+                                <h5 className='line-clamp-1 font-medium capitalize max-[700px]:text-sm'>
                                     {item.name}
                                 </h5>
-                                <h6 className='line-clamp-1 text-sm text-gray-500 capitalize'>
+                                <h6 className='line-clamp-1 text-sm text-gray-500 capitalize max-[700px]:text-[12px]'>
                                     {item.singer}
                                 </h6>
                             </div>

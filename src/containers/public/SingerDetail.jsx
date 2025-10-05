@@ -26,24 +26,26 @@ const SingerDetail = () => {
 
                 </div>
                 <div className="w-full h-full bg-[rgba(191,219,219,0.8)] z-20 flex items-end justify-end">
-                    <div className="w-full flex pb-6 items-center gap-5 px-[59px] z-20">
+                    <div className="w-full flex pb-6 items-center gap-5 px-[59px] z-20 max-[1200px]:px-5 max-[450px]:gap-2">
                         <img src={singerDetail?.img} 
                             alt=""
-                            className="w-[140px] h-[140px] rounded-[50%]"
+                            className="w-[140px] h-[140px] rounded-[50%] max-[850px]:w-30 max-[850px]:h-30 max-[586px]:w-20 max-[586px]:h-20"
                         />
                         <div className="flex flex-col">
-                            <div className="flex items-center gap-4 mb-4">
-                                <h1 className="text-6xl font-bold capitalize">{singerDetail?.stagename}</h1>
-                                <ButtonCircle className={"!h-14 !w-14 !bg-[#0e8080] mt-2"}>
-                                    <BiSolidRightArrow className="text-2xl text-white"/>
+                            <div className="flex items-center gap-4 mb-4 max-[586px]:mb-1">
+                                <h1 className="text-6xl font-bold capitalize max-[850px]:text-4xl max-[586px]:text-2xl max-[450px]:text-lg">
+                                    {singerDetail?.stagename}
+                                </h1>
+                                <ButtonCircle className={"!h-14 !w-14 !bg-[#0e8080] mt-2 max-[850px]:!h-10 max-[850px]:!w-10 max-[586px]:!w-8 max-[586px]:!h-8 max-[450px]:hidden"}>
+                                    <BiSolidRightArrow className="text-2xl text-white max-[586px]:text-base"/>
                                 </ButtonCircle>
                             </div>
-                            <div className="flex items-center gap-4 mb-4">
-                                <h5 className="text-gray-600 text-sm font-medium">
+                            <div className="flex items-center gap-4 mb-4 max-[586px]:flex-col max-[586px]:items-start max-[586px]:gap-0">
+                                <h5 className="text-gray-600 text-sm font-medium max-[450px]:text-[10px]">
                                     449.957 người quan tâm
                                 </h5>
-                                <Button className={"uppercase !py-1 gap-1 bg-transparent border border-[rgba(0,0,0,0.1)] text-gray-600 text-sm !font-[400]"}>
-                                    <IoCheckmark className="text-lg"/>
+                                <Button className={"uppercase !py-1 gap-1 bg-transparent border border-[rgba(0,0,0,0.1)] text-gray-600 text-sm !font-[400] max-[450px]:text-[10px]"}>
+                                    <IoCheckmark className="text-lg max-[450px]:text-sm"/>
                                     đã quan tâm
                                 </Button>
                             </div>
@@ -51,17 +53,17 @@ const SingerDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full px-[59px] mt-10">
+            <div className="w-full px-[59px] mt-10 max-[1200px]:px-5">
                 <div className={`w-full flex justify-between`}>
-                    <h2 className='capitalize text-2xl font-medium '>
+                    <h2 className='capitalize text-2xl font-medium max-[550px]:text-lg'>
                         bài hát nổi bật
                     </h2>
-                    <div className="flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500]">
+                    <div className="flex gap-2.5 items-center text-[15px] text-gray-500 cursor-pointer font-[500] max-[550px]:hidden">
                         <h5 className='uppercase'>tất cả</h5>
                         <MdOutlineArrowForwardIos/>
                     </div>
                 </div>
-                <div className="w-full flex gap-10">
+                <div className="w-full flex gap-10 max-[765px]:flex-col max-[765px]:gap-0">
                     <TableSong 
                         isHeader={"hidden"} 
                         data={part1}
@@ -75,18 +77,19 @@ const SingerDetail = () => {
                         classSong={"w-7/10"}
                         isAlbum={"hidden"}
                         isIndex={"hidden"}
+                        className={"max-[765px]:-mt-1"}
                     />
                 </div>
                 <ListMusic 
                     data={albumForSinger}
                     isFan={"hidden"}
-                    classCard={"!w-1/5"}
+                    classCard={"w-1/5"}
                     nameList={"Single & EP"}
                     type={"album"}
                 />
                 <ListMusic 
                     data={album2ForSinger}
-                    classCard={"!w-1/5"}
+                    classCard={"w-1/5"}
                     isFan={"hidden"}
                     nameList={"Album"}
                     type={"album"}
@@ -95,14 +98,14 @@ const SingerDetail = () => {
                 <ListMusic
                     nameList={"Mv"}
                     data={part3}
-                    classCard={"!w-1/3"}
+                    classCard={"min-[650px]:!w-1/3"}
                     isFan={"hidden"}
                     classIcon={"gap-10"}
                     type={"mv"}
                 />
                 <ListMusic 
                     data={top100ForSinger}
-                    classCard={"!w-1/5"}
+                    classCard={"w-1/5"}
                     isFan={"hidden"}
                     nameList={"tuyển tập"}
                     type={"album"}
@@ -115,10 +118,10 @@ const SingerDetail = () => {
                     className={"!text-2xl capitalize mt-10"}
                     isShuffle={"hidden"}
                 />
-                <div className="w-full mt-10">
+                <div className="w-full mt-10 max-[450px]:mt-5">
                     <h2 className="text-2xl font-medium">Về {singerDetail?.stagename}</h2>
-                    <div className="w-full flex gap-10 mt-7">
-                        <div className="w-1/2 aspect-[3/2]">
+                    <div className="w-full flex gap-10 mt-7 max-[750px]:flex-col max-[450px]:gap-2">
+                        <div className="w-1/2 aspect-[3/2] max-[750px]:w-full">
                             <img 
                                 src={singerDetail?.imginfor} 
                                 alt={singerDetail?.name} 
@@ -132,7 +135,7 @@ const SingerDetail = () => {
                             <div className="w-full">
                                 <ModalSinger data={singerDetail}/>
                             </div>
-                            <div className="flex items-center gap-8 mt-8">
+                            <div className="flex items-center gap-8 mt-8 max-[450px]:flex-col max-[450px]:items-start max-[450px]:gap-2 max-[450px]:mt-2">
                                 <div className="text-sm">
                                     <div className="text-2xl font-medium">
                                         2.566.278

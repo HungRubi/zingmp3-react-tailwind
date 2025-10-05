@@ -1,4 +1,5 @@
 const actionType = {
+    TAB_MOBIE_LEFT: 'TAB_MOBIE_LEFT',
     GET_HOME: 'GET_HOME',
     TAB_MUSIC: 'TAB_MUSIC',
     DELETE_PLAYLIST: 'DELETE_PLAYLIST',

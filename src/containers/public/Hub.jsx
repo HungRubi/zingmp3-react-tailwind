@@ -100,18 +100,18 @@ const Hub = () => {
     const {albumHot} = useSelector(state => state.app)
     return (
         <div className="w-full">
-            <div className="px-[59px] mt-10">
+            <div className="px-[59px] mt-10 max-[1200px]:px-5">
                 <img src="https://photo-zmp3.zmdcdn.me/cover/3/f/4/1/3f41f32d1ca9baeb2206137e5f2eab5c.jpg" 
                 alt="hub" className="w-full rounded-md"/>
             </div>
             <ListHub data={dataOutStanding} nameList="nổi bật"/>
             <ListHub data={dataNational} nameList="quốc gia"/>
             <ListHub data={dataMood} nameList="tâm trạng và hoạt động"/>
-            <div className="w-full px-[59px]">
+            <div className="w-full px-[59px] max-[1200px]:px-5">
                 <ListMusic 
                     data={albumHot}
                     isFan={"hidden"}
-                    classCard={"!w-1/5"}
+                    classCard={"w-1/5"}
                     nameList={"album hot"}
                     type={"album"}
                     isSinger={"hidden"}

@@ -115,44 +115,5 @@ body{
     -webkit-text-stroke: 1px #e35050;
 }
 
-@media (max-width: 1708px) {
-    .hide-1708{
-        display: none !important;
-    }
-
-    .search-1708{
-        width: 300px !important;
-    }
-}
-
-@media (max-width: 1557px) {
-    .hide-1557{
-        display: none !important;
-    }
-    .w-auto-1557{
-        width: auto !important;
-        cursor: pointer;
-    }
-}
-
-@media (max-width: 1450px) {
-    .w-full-1450{
-        width: 100% !important;
-    }
-}
-
-@media (max-width: 1294px) {
-    .hide-1294{
-        display: none !important;
-    }
-
-}
-
-@media (max-width: 1195px) {
-    .hide-1195{
-        display: none !important;
-    }
-    
-}
 
 

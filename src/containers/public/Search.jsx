@@ -20,15 +20,19 @@ const Search = () => {
     const {singerSearch, songsSearch, albumsSearch, mvsSearch, singerSuggest} = useSelector(state => state.app);
     return (
         <>
-            <div className="w-full mt-8 border-b border-[#0003] uppercase">
-                <div className="flex px-[59px] h-13 gap-5 items-center">
-                    <h1 className="capitalize h-full text-3xl font-[600] text-gray-800 pr-5 border-r border-[#0002] whitespace-nowrap">
+            <div className="w-full mt-8 border-b border-[#0003] uppercase max-[750px]:mt-4 max-[900px]:border-none">
+                <div className="flex px-[59px] h-13 gap-5 items-center max-[1200px]:px-5 
+                max-[900px]:flex-col max-[900px]:items-start">
+                    <h1 className="capitalize h-full text-3xl font-[600] 
+                    text-gray-800 pr-5 border-r border-[#0002] whitespace-nowrap max-[900px]:border-none max-[600px]:text-xl">
                         kết quả tìm kiếm
                     </h1>
-                    <div className="w-full flex gap-10 h-full">
+                    <div className="w-full flex gap-10 h-full max-[550px]:gap-1 max-[500px]:hidden">
                         {tabs.map((item, index) => (
                             <h5 key={index} onClick={() => setIsTab(index)}
-                            className={`text-[16px] leading-11 h-full font-[500] text-gray-600 cursor-pointer hover:text-gray-900 ${index === isTab ? 'border-b-2 border-[#218888]' : 'border-b-2 border-transparent'}`}>
+                            className={`text-[16px] leading-11 h-full font-[500] text-gray-600 max-[600px]:text-[12px]
+                            cursor-pointer hover:text-gray-900 ${index === isTab
+                            ? 'border-b-2 border-[#218888]' : 'border-b-2 border-transparent'}`}>
                                 {item}
                             </h5>
                         ))}
@@ -36,7 +40,7 @@ const Search = () => {
                 </div>
                 
             </div>
-            <div className={`mt-8 px-[59px] ${isAdver ? 'hidden' : 'block'}`}>
+            <div className={`mt-8 px-[59px] ${isAdver ? 'hidden' : 'block'} max-[1200px]:px-5 max-[900px]:mt-12 max-[500px]:mt-0`}>
                 <div className="w-full relative overflow-hidden rounded-lg">
                     <img src="/img/adver.jpg" alt="" className="w-full" />
                     <div onClick={handleClick}
@@ -48,15 +52,15 @@ const Search = () => {
             {singerSearch.length > 0 || songsSearch.length > 0 || albumsSearch.length > 0 || mvsSearch.length > 0 ? (
                 <>
                     {isTab === 0 ?  (
-                        <div className="w-full px-[59px] mt-8">
+                        <div className="w-full px-[59px] mt-8 max-[1200px]:px-5 max-[750px]:mt-4">
                             <ListMusicSlider
                                 dataSinger={singerSearch} 
                                 dataSong={songsSearch?.slice(0,2)}
                                 data={[]} 
-                                nameList={"Nổi bật"} 
+                                nameList={"Nổi bật"}
                             />
-                            <h3 className='-mb-5 capitalize text-2xl font-[600] mt-10'>bài hát</h3>
-                            <div className="w-full flex gap-10">
+                            <h3 className='-mb-5 capitalize text-2xl font-[600] mt-10 max-[700px]:mb-1'>bài hát</h3>
+                            <div className="w-full flex gap-10 max-[950px]:flex-col max-[950px]:gap-0">
                                 <TableSong
                                     data={songsSearch?.slice(0,3)}
                                     isHeader={"hidden"}
@@ -70,20 +74,21 @@ const Search = () => {
                                     isIndex={"hidden"}
                                     isMusic={"hidden"}
                                     classIndex={"hidden"}
+                                    className={'max-[950px]:-mt-1'}
                                 />
 
                             </div>
                             <ListMusic
                                 nameList={"Playlist/Album"}
                                 data={albumsSearch?.slice(0,5)}
-                                classCard={"!w-1/5"}
+                                classCard={"w-1/5"}
                                 isFan={"hidden"}
                                 isSinger={"hidden"}
                                 type={"album"}
                             />
                             <ListMusic
                                 nameList={"MV"}
-                                classCard={"!w-1/3"}
+                                classCard={"min-[650px]:!w-1/3"}
                                 dataSinger={singerSearch[0]}
                                 data={mvsSearch?.slice(0,3)}
                                 isFan={"hidden"}
@@ -102,7 +107,7 @@ const Search = () => {
                         </div>
                     ) : ("")}
                     {isTab === 1 ? (
-                        <div className="mt-10 px-[59px]">
+                        <div className="mt-10 px-[59px] max-[1200px]:px-5 max-[750px]:mt-4">
                             <TableSong
                                 data={songsSearch}
                                 isHeader={"hidden"}
@@ -113,7 +118,7 @@ const Search = () => {
                         </div>
                     ) : ("")}
                     {isTab === 2 ? (
-                        <div className="mt-10 px-[59px]">
+                        <div className="mt-10 px-[59px] max-[1200px]:px-5 max-[750px]:mt-4">
                             <ListMusic
                                 nameList={"Playlist/Album"}
                                 data={albumsSearch}
@@ -127,7 +132,7 @@ const Search = () => {
                     ) : ("")}
                     {isTab === 3 ? (
                         <>
-                            <div className="mt-10 px-[59px]">
+                            <div className="mt-10 px-[59px] max-[750px]:mt-4 max-[1200px]:px-5">
                                 <ListMusic
                                     dataSinger={singerSearch[0]}
                                     data={songsSearch?.slice(0, 7)}
@@ -135,8 +140,7 @@ const Search = () => {
                                     isSinger={"hidden"}
                                 />
                             </div>
-                            <div className="mt-10 px-[59px]">
-                            
+                            <div className="mt-10 px-[59px] max-[1200px]:px-5">
                                 <ListSingerFollower
                                     name={"Nghệ sĩ/OA"}
                                     data={singerSuggest}
@@ -148,10 +152,10 @@ const Search = () => {
                         </>
                     ) : ("")}
                     {isTab === 4 ? (
-                        <div className="mt-10 px-[59px]">
+                        <div className="mt-10 px-[59px] max-[750px]:mt-4 max-[1200px]:px-5">
                             <ListMusic
                                 nameList={"MV"}
-                                classCard={"!w-1/3"}
+                                classCard={"min-[650px]:!w-1/3"}
                                 dataSinger={singerSearch[0]}
                                 data={mvsSearch?.slice(0,3)}
                                 isFan={"hidden"}

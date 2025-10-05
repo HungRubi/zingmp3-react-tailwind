@@ -42,13 +42,14 @@ const Slider = () => {
         }
     }, [])
     return (
-        <div className="flex items-center justify-between w-full overflow-hidden pt-8 gap-4">
+        <div className="flex items-center justify-between w-full overflow-hidden pt-8 gap-4 max-[550px]:pt-3">
             {banners?.map((item, index) => (
                 <img 
                     key={index}
                     src={item.thumbnail} 
                     alt="slider frist" 
-                    className=" flex-1 object-contain w-[calc(100%/3-11px)] rounded-lg slider-items" 
+                    className=" flex-1 object-contain w-[calc(100%/3-11px)] 
+                    rounded-lg slider-items max-[750px]:w-[calc(100%/2-11px)] max-[550px]:w-full" 
                 />
             ))}
         </div>

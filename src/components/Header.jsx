@@ -52,7 +52,7 @@ const Header = () => {
     return(
         <div className="flex items-center justify-between w-full h-full">
             <div className="flex items-center gap-8">
-                <div className="flex items-center hide-1294">
+                <div className="flex items-center max-[750px]:hidden">
                     <span className='text-[24px] mr-5 cursor-pointer opacity-40'>
                         <GoArrowLeft/>
                     </span>
@@ -60,19 +60,20 @@ const Header = () => {
                         <GoArrowRight/>
                     </span>
                 </div>
-                <div className="w-[440px] w-auto-1557 search-1708">
+                <div className="w-[440px] max-[1380px]:w-85 max-[1280px]:w-65 
+                max-[1200px]:w-auto max-[634px]:w-80 max-[530px]:w-60 max-[450px]:w-full">
                     <Search/>
                 </div>
             </div>
             <div className="flex items-center justify-between gap-2.5">
-                <Button className="!bg-[#218888] !text-white line-clamp-1 hide-1195">
+                <Button className="!bg-[#218888] !text-white line-clamp-1 max-[634px]:hidden">
                     Nâng cấp tài khoản
                 </Button>
-                <Button className="hide-1195">
+                <Button className="max-[634px]:hidden">
                     <Download className="hide-1708"/>
                     <span className='line-clamp-1'>Tải bản Windows</span>
                 </Button>
-                <div ref={settingRef}>
+                <div ref={settingRef} className='max-[450px]:hidden'>
                     <ButtonCricle 
                         className={"relative"} 
                         onClick={() => setShowSettingMenu(!showSettingMenu)}

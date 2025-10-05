@@ -26,7 +26,7 @@ const Advertisement = () => {
     }, []);
 
     return (
-        <div className="relative w-full overflow-hidden mt-8">
+        <div className="relative w-full overflow-hidden mt-8 max-[550px]:mt-5">
             <div className={`flex transition-transform duration-1000 ease-in-out ${animate ? 'slider-2' : ''}`}>
                 {currentImages.map((src, index) => (
                     <img key={index} src={src} alt="Slider" className="w-full flex-shrink-0 rounded-sm" />

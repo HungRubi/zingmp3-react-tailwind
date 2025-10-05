@@ -6,6 +6,7 @@ const initState = {
     favoriteAlbum: null,
     favoriteSinger: null,
     isTabMusic: false,
+    isTabLeftMobie: false,
 }
 
 const userReducers = (state = initState, action) => {
@@ -33,6 +34,12 @@ const userReducers = (state = initState, action) => {
             return {
                 ...state,
                 isTabMusic: action.flag
+            }
+
+        case actionType.TAB_MOBIE_LEFT:
+            return {
+                ...state,
+                isTabLeftMobie: action.flag
             }
         default:
             return state

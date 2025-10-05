@@ -12,8 +12,14 @@ export const logoutPersist = () => ({
     type: actionType.LOGOUT_PERSIST,
     message: "Logout successfully",
 })
+
 export const isTabMusic = (flag) => ({
     type: actionType.TAB_MUSIC,
     flag
-})  
+})
+
+export const isSidebarLeftMobie = (flag) => ({
+    type: actionType.TAB_MOBIE_LEFT,
+    flag
+})
     

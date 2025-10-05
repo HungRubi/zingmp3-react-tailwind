@@ -20,7 +20,7 @@ const Home = () => {
     const {recentSongs} = useSelector(state => state.music)
     const [isState, setIsState] = useState(0);
     return (
-        <div className="w-full px-[59px] backgroundColor-main-100">
+        <div className="w-full px-[59px] backgroundColor-main-100 max-[1200px]:px-5 overflow-x-hidden">
             <Slider/>
             <Advertisement/>
             <ListMusic 
@@ -37,7 +37,7 @@ const Home = () => {
             <ListMusic
                 dataSinger={randumSinger}
                 data={songForFan}
-                classCard={"!w-1/5"} 
+                classCard={"w-1/5"} 
                 classIcon={"!gap-5"}
                 isAbum={"hidden"}
                 type={"song"}
@@ -45,7 +45,7 @@ const Home = () => {
             />
             <ListMusic 
                 isFan={"hidden"}
-                classCard={"!w-1/5"}
+                classCard={"w-1/5"}
                 nameList={"top 100"}
                 data={top100}
                 type={"album"}
@@ -54,7 +54,7 @@ const Home = () => {
             <ListMusic 
                 data={canSonglisten}
                 isFan={"hidden"}
-                classCard={"!w-1/5"}
+                classCard={"w-1/5"}
                 nameList={"có thể bạn muốn nghe"}
                 isSinger={"hidden"}
                 type={"album"}
@@ -62,12 +62,12 @@ const Home = () => {
             <ListMusic 
                 data={albumChill}
                 isFan={"hidden"}
-                classCard={"!w-1/5"}
+                classCard={"w-1/5"}
                 nameList={"chill"}
                 isSinger={"hidden"}
                 type={"album"}
             />
-            <div className={`w-full flex items-center gap-3 mt-10 -mb-10`}>
+            <div className={`w-full flex items-center gap-3 mt-10 -mb-10 max-[550px]:mt-5`}>
                 <Button onClick={() => setIsState(0)} 
                 className={`!py-[2px] uppercase text-[12px] !font-[600] ${isState === 0 ? "!bg-[#218888] text-white" : "text-gray-500 !bg-transparent border border-gray-400 transition duration-300 hover:!bg-[#218888] hover:!text-white"} `}>
                     tất cả
@@ -86,22 +86,22 @@ const Home = () => {
             nameList={""}
             isReset={"hidden"}/>
             <ListMusicSlider data={topSong} type={"slider"}/>
-            <div className="w-full flex items-center gap-5 mt-10">
-                <div className="w-1/3 relative rounded-lg overflow-hidden group">
+            <div className="w-full flex items-center gap-5 mt-10 max-[600px]:flex-col">
+                <div className="w-1/3 relative rounded-lg overflow-hidden group max-[600px]:w-full">
                     <img 
                         src="https://zmp3-static.zmdcdn.me/skins/zmp3-v5.2/images/song-vn-2x.jpg" 
                         alt="sky" 
                         className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
                     />
                 </div>
-                <div className="w-1/3 relative rounded-lg overflow-hidden group">
+                <div className="w-1/3 relative rounded-lg overflow-hidden group max-[600px]:w-full">
                     <img 
                         src="https://zmp3-static.zmdcdn.me/skins/zmp3-v5.2/images/web_song_usuk.jpg" 
                         alt="sky" 
                         className="w-full object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-120"
                     />
                 </div>
-                <div className="w-1/3 relative rounded-lg overflow-hidden group">
+                <div className="w-1/3 relative rounded-lg overflow-hidden group max-[600px]:w-full">
                     <img 
                         src="https://zmp3-static.zmdcdn.me/skins/zmp3-v5.2/images/web_song_kpop.jpg" 
                         alt="sky" 
@@ -112,7 +112,7 @@ const Home = () => {
             <ListMusic 
                 data={albumHot}
                 isFan={"hidden"}
-                classCard={"!w-1/5"}
+                classCard={"w-1/5"}
                 nameList={"album hot"}
                 isSinger={"hidden"}
                 type={"album"}
@@ -127,9 +127,10 @@ const Home = () => {
                 </div>
                 <div className="w-full flex flex-wrap gap-5 mt-8">
                     {partnor?.map(item => (
-                        <div key={item._id} className="w-[calc(100%/8-18px)] bg-white rounded-lg flex items-center justify-center">
+                        <div key={item._id} className="w-[calc(100%/8-18px)] bg-white flex-none h-20 overflow-hidden
+                        rounded-lg flex items-center justify-center max-[850px]:!w-[calc(100%/4-18px)] max-[550px]:!w-[calc(100%/2-18px)]">
                             <img src={item.img}
-                            className='object-contain w-1/2' 
+                            className='object-cover w-full' 
                             alt=""/>
                         </div>
                     ))}

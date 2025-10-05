@@ -13,9 +13,9 @@ const BangXepHang = () => {
     }, [dispatch])
     const { songsBxh } = useSelector(state => state.app);
     return (
-        <div className="w-full px-[59px] mt-10">
+        <div className="w-full px-[59px] mt-10 max-[1200px]:px-5">
             <div className="flex items-center gap-3">
-                <h2 className="text-4xl font-[600] capitalize">
+                <h2 className="text-4xl font-[600] capitalize max-[650px]:!text-2xl">
                     BXH nhạc mới
                 </h2>
                 <ButtonCricle className={"bg-white shadow-sm mt-1"}>

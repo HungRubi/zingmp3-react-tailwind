@@ -24,17 +24,19 @@ const ListHub = ({data, nameList}) => {
     const displayData = showAll ? data : data.slice(0, 4)
 
     return (
-        <div ref={containerRef} className="w-full flex flex-wrap gap-5 px-[59px] mt-10">
+        <div ref={containerRef} className="w-full flex flex-wrap gap-5 px-[59px] mt-10 max-[1200px]:px-5 max-[750px]:mt-5">
             <div className="w-full">
                 <h5 className='text-2xl font-medium capitalize text-gray-700'>
                     {nameList}    
                 </h5>
             </div>
             {displayData.map(item => (
-                <div key={item.text} className="w-[calc(100%/4-15px)] rounded-2xl relative">
+                <div key={item.text} className="w-[calc(100%/4-15px)] rounded-2xl relative 
+                max-[750px]:w-[calc(100%/2-15px)] max-[457px]:w-full">
                     <img src={item.src} 
                     alt="bxh" className="w-full rounded-2xl"/>
-                    <h5 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl text-white font-medium capitalize whitespace-nowrap">
+                    <h5 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                    text-2xl text-white font-medium capitalize whitespace-nowrap max-[970px]:text-lg">
                         {item.text}
                     </h5>
                 </div>
@@ -43,7 +45,8 @@ const ListHub = ({data, nameList}) => {
                 <div className="w-full flex items-center justify-center">
                     <Button 
                         onClick={() => setShowAll(!showAll)}
-                        className={`uppercase border border-[#0000001e] !py-[5px] bg-transparent text-gray-500 text-sm ${showAll ? '!text-[#0E8080]' : ''}`}
+                        className={`uppercase border border-[#0000001e] !py-[5px] max-[750px]:text-[12px]
+                            bg-transparent text-gray-500 text-sm ${showAll ? '!text-[#0E8080]' : ''}`}
                     >
                         {showAll ? 'thu gọn' : 'tất cả'}
                     </Button>

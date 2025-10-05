@@ -22,20 +22,20 @@ const MyMusic = () => {
     const active = "uppercase font-medium text-[#218888] border-b-2 border-[#218888] py-3";
     const notActive = "uppercase font-medium text-gray-600 border-b-2 border-transparent py-3";
     return (
-        <div className="mt-8 px-[59px] w-full">
+        <div className="mt-8 px-[59px] w-full max-[1200px]:px-5">
             <ListSingerFollower 
                 data={favoriteSinger?.slice(0,5)}
                 isButton={"hidden"}
             />
             <ListMusic 
                 isFan={"hidden"}
-                classCard={"!w-1/5"}
+                classCard={"w-1/5"}
                 nameList={"PLAYLIST"}
                 type={"album"}
                 data={formatAlbum}
                 isSinger={"hidden"}
             />
-            <div className="mt-10 w-full flex items-center gap-10 border-b border-[#0000002c]">
+            <div className="mt-10 w-full flex items-center gap-10 border-b border-[#0000002c] max-[750px]:mt-3">
                 {tabs.map(item => (
                     <NavLink key={item} to={item.path} 
                     className={({isActive}) => isActive ? active : notActive}>
@@ -45,7 +45,7 @@ const MyMusic = () => {
                     </NavLink>
                 ))}
             </div>
-            <div className="mt-8">
+            <div className="mt-8 max-[750px]:mt-3">
                 <Routes>
                     <Route path="/" element={<Navigate to="/mymusic/song" replace />} />
                     <Route path="/song" element={<MySong/>}/>
